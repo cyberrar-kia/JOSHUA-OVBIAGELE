@@ -760,6 +760,12 @@
         <div><span class="mark">✓</span> Paid securely through Paystack</div>
       </div>
       <a class="cta-btn" href="#buy" style="margin-top:22px;">Join the Founding Cohort →</a>
+
+      <div class="seats-row" style="margin:22px auto 0;">
+        <span>🔥 Only <b id="seatsLeftText2">19</b> seats left, that includes the 14-day refund</span>
+        <div class="seats-bar"><div class="seats-bar-fill" id="seatsBarFill2" style="width:100%"></div></div>
+        <span id="seatsTotalText2">19</span>
+      </div>
     </div>
   </div>
 </section>
@@ -868,6 +874,9 @@
     document.getElementById('seatsBarFill').style.width = (left / SEATS_TOTAL * 100) + '%';
     document.getElementById('seats').textContent = left;
     document.getElementById('guaranteeSeatsLeft').textContent = left;
+    document.getElementById('seatsLeftText2').textContent = left;
+    document.getElementById('seatsTotalText2').textContent = SEATS_TOTAL;
+    document.getElementById('seatsBarFill2').style.width = (left / SEATS_TOTAL * 100) + '%';
   })();
 
   // ---- Real sign-up toast. Empty by default, only shows entries you actually add below. ----
