@@ -19,8 +19,6 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1447722983356860');
 fbq('track', 'PageView');
-// This fires only when someone actually lands here, which only happens after a real successful Paystack payment
-fbq('track', 'Purchase', {value: 25000, currency: 'NGN'});
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
@@ -89,10 +87,11 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     margin-top:24px;
     width:100%;
   }
+  #successCard, #noRefCard{ display:none; }
 </style>
 </head>
 <body>
-  <div class="card">
+  <div class="card" id="successCard">
     <div class="check">✓</div>
     <h1>You're in.</h1>
     <p>Payment received, welcome to the founding cohort.</p>
@@ -106,9 +105,32 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     <a class="whatsapp-btn" id="waBtn" href="#" target="_blank" rel="noopener">💬 Confirm your payment on WhatsApp</a>
   </div>
 
+  <div class="card" id="noRefCard">
+    <h1>Didn't complete a payment?</h1>
+    <p>This page is only meant to be seen right after a successful payment, and we couldn't confirm one for this visit.</p>
+    <p>If you did pay and landed here by mistake, message me directly on WhatsApp with your name and email and I'll sort it out.</p>
+    <a class="whatsapp-btn" id="waBtn2" href="#" target="_blank" rel="noopener">💬 Message me on WhatsApp</a>
+  </div>
+
   <script>
     var message = "Hi Josh, I just made payment for your Zero To Foreign Client Cohort. Here are my details:\nName: \nEmail: ";
-    document.getElementById('waBtn').href = "https://wa.me/2349160013685?text=" + encodeURIComponent(message);
+    var waLink = "https://wa.me/2349160013685?text=" + encodeURIComponent(message);
+    document.getElementById('waBtn').href = waLink;
+    document.getElementById('waBtn2').href = waLink;
+
+    // Only treat this as a real payment if Paystack actually redirected here with a transaction reference.
+    // A bare visit to this URL (no reference/trxref param) never gets the success content or a Purchase event.
+    var params = new URLSearchParams(window.location.search);
+    var hasReference = params.get('reference') || params.get('trxref');
+
+    if(hasReference){
+      document.getElementById('successCard').style.display = 'block';
+      if(typeof fbq === 'function'){
+        fbq('track', 'Purchase', {value: 25000, currency: 'NGN'});
+      }
+    } else {
+      document.getElementById('noRefCard').style.display = 'block';
+    }
   </script>
 </body>
 </html>
