@@ -46,13 +46,28 @@
   .topbar{
     background:var(--ink);
     color:var(--paper);
-    text-align:center;
     font-family:'JetBrains Mono', monospace;
     font-size:12.5px;
     letter-spacing:0.04em;
-    padding:9px 16px;
+    padding:9px 0;
+    overflow:hidden;
+    white-space:nowrap;
+    position:relative;
   }
   .topbar b{ color:#F0C863; }
+  .topbar-track{
+    display:inline-block;
+    padding-left:100%;
+    animation:topbar-marquee 16s linear infinite;
+  }
+  .topbar-track span{ margin:0 40px; }
+  @keyframes topbar-marquee{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-100%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .topbar-track{ animation:none; padding-left:0; }
+  }
 
   /* ---------- Hero ---------- */
   .hero{
@@ -554,15 +569,44 @@
   }
 
   @media (max-width:560px){
-    section{ padding:52px 0; }
+    section{ padding:44px 0; }
+    .wrap{ padding:0 20px; }
+    body{ font-size:15.5px; }
+    h1{ line-height:1.18; letter-spacing:-0.005em; }
+    .hero{ padding:48px 0 40px; }
+    .hero-badge{ font-size:12px; padding:7px 14px 7px 6px; text-align:left; }
+    .hero-sub{ font-size:16px; }
+    .stat-row{ grid-template-columns:repeat(2,1fr); }
+    .stat-col{ padding:18px 8px; }
+    .stat-col:nth-child(odd){ border-right:1px solid var(--stat-line); }
+    .stat-col:nth-child(-n+2){ border-bottom:1px solid var(--stat-line); }
     .module{ grid-template-columns:36px 1fr; }
     .module .val{ grid-column:2; margin-top:4px; }
+    .module h3{ font-size:17px; }
+    .module p{ font-size:14px; }
+    .pain-item p{ font-size:15.5px; }
+    .pain-item em{ font-size:13.5px; }
+    .proof-card{ padding:20px; }
+    .proof-card h3{ font-size:17.5px; }
+    .guarantee-box{ padding:22px 18px; }
+    .refund-spotlight{ max-width:100%; padding:14px 16px; }
+    .refund-spotlight .num{ font-size:28px; }
+    .seats-row{ flex-wrap:wrap; justify-content:center; text-align:center; }
+    .seats-row .seats-bar{ order:3; width:100%; margin-top:6px; }
+    .price-row{ flex-wrap:wrap; row-gap:4px; }
+    .price-row .new{ font-size:32px; }
+    .signup-toast{ left:12px; right:12px; bottom:12px; max-width:none; }
+    .cta-btn{ font-size:15px; padding:15px 22px; width:100%; justify-content:center; }
   }
 </style>
 </head>
 <body>
 
-<div class="topbar">⚠ Founding cohort. <b>Price rises to ₦40,000</b> once the first 19 seats are filled</div>
+<div class="topbar"><div class="topbar-track">
+  <span>⚠ Founding cohort. <b>Price rises to ₦40,000</b> once the first 19 seats are filled</span>
+  <span>⚠ Founding cohort. <b>Price rises to ₦40,000</b> once the first 19 seats are filled</span>
+  <span>⚠ Founding cohort. <b>Price rises to ₦40,000</b> once the first 19 seats are filled</span>
+</div></div>
 
 <!-- ===================== HERO ===================== -->
 <header class="hero">
@@ -897,8 +941,8 @@
       setTimeout(()=> toast.classList.remove('show'), 4500);
       i++;
     }
-    setTimeout(showNext, 6000);
-    setInterval(showNext, 18000);
+    setTimeout(showNext, 8000);
+    setInterval(showNext, 180000); // every 3 minutes
   })();
 </script>
 
