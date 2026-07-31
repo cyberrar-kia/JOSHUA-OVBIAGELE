@@ -438,6 +438,50 @@
     margin-top:4px;
   }
 
+  .video-section{ padding:0 0 8px; }
+  .video-frame{
+    max-width:760px;
+    margin:0 auto;
+    aspect-ratio:16/9;
+    background:var(--near-black);
+    border-radius:12px;
+    border:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    color:#B7B9CE;
+    overflow:hidden;
+    position:relative;
+  }
+  .video-frame .play-icon{
+    width:56px; height:56px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.18);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .video-frame .play-icon::after{
+    content:"";
+    border-style:solid;
+    border-width:9px 0 9px 15px;
+    border-color:transparent transparent transparent #F0C863;
+    margin-left:4px;
+  }
+  .video-frame .video-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:#9A9FBE;
+  }
+  /* To replace with the real video once it's ready:
+     swap this whole .video-frame div for a <video controls playsinline src="assets/your-video.mp4" poster="assets/your-poster.jpg"></video> */
+  @media (max-width:560px){
+    .video-frame .play-icon{ width:46px; height:46px; }
+  }
+
   /* ---------- FAQ ---------- */
   .faq-item{ border-bottom:1px solid var(--line); }
   .faq-q{
@@ -636,6 +680,15 @@
     </div>
   </div>
 </header>
+
+<section class="video-section">
+  <div class="wrap">
+    <div class="video-frame">
+      <div class="play-icon"></div>
+      <div class="video-label">Video walkthrough coming soon</div>
+    </div>
+  </div>
+</section>
 
 <section class="ladder-section">
   <div class="wrap">
