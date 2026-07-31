@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zero to Foreign Client — Build Websites With AI, Get Paid in Dollars</title>
+<meta name="description" content="Learn to build multi-page websites with AI and land paying foreign clients. One-time payment, N20,000.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F4EC;
+    --paper-dim:#EFEAE0;
+    --ink:#14182B;
+    --ink-soft:#2A2F45;
+    --gold:#C6941A;
+    --gold-deep:#9C7412;
+    --line:#DCD5C4;
+    --green:#1D6E4C;
+    --red:#B4432E;
+    --near-black:#0A0A10;
+    --magenta:#E23B8D;
+    --stat-line: rgba(247,244,236,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  .wrap{ max-width:760px; margin:0 auto; padding:0 24px; }
+  section{ padding:72px 0; }
+  a{ color:inherit; text-decoration:none; }
+
+  /* ---------- Nav-less top bar ---------- */
+  .topbar{
+    background:var(--ink);
+    color:var(--paper);
+    text-align:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.04em;
+    padding:9px 16px;
+  }
+  .topbar b{ color:#F0C863; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:var(--near-black);
+    color:var(--paper);
+    padding:64px 0 56px;
+  }
+  .hero .wrap{ text-align:center; max-width:820px; }
+  .hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.14);
+    padding:8px 18px 8px 8px;
+    border-radius:999px;
+    font-size:13px;
+    color:#D9DAE6;
+    margin-bottom:30px;
+  }
+  .hero-badge b{ color:#F0C863; font-weight:700; }
+  .avatar-stack{ display:flex; }
+  .avatar-stack span{
+    width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:700; color:#fff;
+    border:2px solid var(--near-black);
+    margin-left:-8px;
+  }
+  .avatar-stack span:first-child{ margin-left:0; }
+  .strike-word{
+    color:var(--magenta);
+    text-decoration:line-through;
+    text-decoration-thickness:3px;
+    text-decoration-color:rgba(226,59,141,0.6);
+  }
+  .highlight-word{ color:#F0C863; }
+  .stat-row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--stat-line);
+    border-bottom:1px solid var(--stat-line);
+    margin:40px 0 0;
+  }
+  .stat-col{ padding:22px 10px; text-align:center; border-right:1px solid var(--stat-line); }
+  .stat-col:last-child{ border-right:none; }
+  .stat-col .num{ font-family:'JetBrains Mono', monospace; font-size:22px; font-weight:700; color:#F0C863; }
+  .stat-col .lbl{ font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.05em; text-transform:uppercase; color:#9A9FBE; margin-top:4px; }
+  .hero-cta-wrap{ padding:40px 0 8px; }
+  .hero-cta-wrap .cta-sub{ color:#9A9FBE; }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--gold-deep);
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px; height:7px; border-radius:50%;
+    background:var(--green);
+    display:inline-block;
+  }
+  h1{
+    font-size:clamp(32px, 5.4vw, 50px);
+    line-height:1.08;
+    margin-bottom:20px;
+  }
+  h1 em{
+    font-style:italic;
+    color:var(--gold-deep);
+  }
+  .hero-sub{
+    font-size:17.5px;
+    color:var(--ink-soft);
+    max-width:56ch;
+    margin-bottom:32px;
+  }
+
+  /* browser mockup — signature element */
+  .browser{
+    margin:36px 0 32px;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 22px 55px -20px rgba(20,24,43,0.35);
+    background:#fff;
+    border:1px solid var(--line);
+  }
+  .browser-bar{
+    background:var(--paper-dim);
+    padding:10px 14px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    border-bottom:1px solid var(--line);
+  }
+  .dot{ width:9px; height:9px; border-radius:50%; }
+  .dot.r{background:#E6675A;} .dot.y{background:#F0C863;} .dot.g{background:#6FB98A;}
+  .browser-url{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:3px 10px;
+    margin-left:8px;
+    flex:1;
+  }
+  .browser-body{
+    padding:22px 24px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+    min-height:120px;
+    background:
+      linear-gradient(var(--paper-dim) 1px, transparent 1px) 0 0/100% 22px;
+  }
+  .browser-body .cursor{
+    display:inline-block; width:7px; height:15px;
+    background:var(--gold-deep);
+    vertical-align:-2px;
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+  .invoice-strip{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:var(--ink);
+    color:var(--paper);
+    padding:14px 22px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+  }
+  .invoice-strip .amt{ color:#F0C863; font-weight:700; font-size:15px; }
+
+  .cta-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--gold-deep);
+    color:#fff;
+    font-weight:700;
+    font-size:16px;
+    padding:16px 26px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+    box-shadow:0 12px 28px -10px rgba(156,116,18,0.55);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .cta-btn:hover{ transform:translateY(-1px); box-shadow:0 16px 32px -10px rgba(156,116,18,0.65); }
+  .cta-sub{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    margin-top:10px;
+  }
+
+  /* ---------- Pain section (dark) ---------- */
+  .dark{
+    background:var(--near-black);
+    color:var(--paper);
+  }
+  .dark h2{ color:var(--paper); }
+  .dark .eyebrow{ color:#E8C879; }
+  .dark .eyebrow::before{ background:#E8C879; }
+  .pain-list{ margin-top:28px; }
+  .pain-item{
+    padding:22px 0;
+    border-bottom:1px solid rgba(247,244,236,0.14);
+  }
+  .pain-item:first-child{ padding-top:0; }
+  .pain-item .n{
+    font-family:'JetBrains Mono', monospace;
+    color:#8A8FA8;
+    font-size:12.5px;
+    display:block;
+    margin-bottom:6px;
+  }
+  .pain-item p{ font-size:16.5px; color:#D9DAE6; }
+  .pain-item b{ color:#F0C863; }
+
+  /* ---------- Modules ---------- */
+  .module{
+    display:grid;
+    grid-template-columns:44px 1fr auto;
+    gap:16px;
+    align-items:start;
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .module:first-of-type{ padding-top:0; }
+  .module .num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--gold-deep);
+    border:1px solid var(--line);
+    border-radius:6px;
+    width:36px; height:36px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .module h3{ font-size:18px; margin-bottom:6px; }
+  .module p{ color:var(--ink-soft); font-size:14.5px; }
+  .module .val{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    color:var(--gold-deep);
+    white-space:nowrap;
+  }
+
+  .value-total{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 0 0;
+    margin-top:8px;
+  }
+  .value-total .label{ font-size:14.5px; color:var(--ink-soft); }
+  .value-total .amt{ font-family:'JetBrains Mono', monospace; font-size:22px; font-weight:700; }
+  .strike{ text-decoration:line-through; color:#9A93AF; margin-right:10px; }
+
+  /* ---------- Proof ---------- */
+  .proof-card{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:26px;
+    margin-bottom:18px;
+    background:#fff;
+  }
+  .proof-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--green);
+    margin-bottom:8px;
+  }
+  .proof-card h3{ font-size:19px; margin-bottom:8px; }
+  .proof-card p{ color:var(--ink-soft); font-size:15px; }
+  .proof-figure{
+    font-family:'JetBrains Mono', monospace;
+    font-size:26px;
+    font-weight:700;
+    color:var(--gold-deep);
+    margin:6px 0;
+  }
+
+  /* ---------- Guarantee ---------- */
+  .guarantee-box{
+    border:1.5px solid var(--gold-deep);
+    border-radius:12px;
+    padding:30px;
+    background:linear-gradient(180deg, #FFFCF4, var(--paper));
+  }
+  .guarantee-box h3{ font-size:20px; margin-bottom:10px; }
+  .check-list{ margin-top:14px; }
+  .check-list div{ display:flex; gap:10px; margin-bottom:8px; font-size:14.5px; color:var(--ink-soft); }
+  .check-list .mark{ color:var(--green); font-weight:700; }
+
+  /* ---------- FAQ ---------- */
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-q{
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    padding:18px 0;
+    font-size:15.5px;
+    font-weight:600;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+  }
+  .faq-q .plus{ font-family:'JetBrains Mono', monospace; color:var(--gold-deep); transition:transform .2s ease; }
+  .faq-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+    color:var(--ink-soft);
+    font-size:14.5px;
+    padding-right:24px;
+  }
+  .faq-item.open .faq-a{ max-height:200px; padding-bottom:18px; }
+  .faq-item.open .plus{ transform:rotate(45deg); }
+
+  /* ---------- Final CTA / countdown ---------- */
+  .final-cta{ text-align:center; }
+  .price-row{
+    display:flex;
+    justify-content:center;
+    align-items:baseline;
+    gap:14px;
+    margin:18px 0 6px;
+  }
+  .price-row .old{ font-size:22px; color:#9A93AF; text-decoration:line-through; font-family:'JetBrains Mono', monospace; }
+  .price-row .new{ font-size:40px; font-weight:700; font-family:'JetBrains Mono', monospace; color:var(--gold-deep); }
+  .countdown{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-bottom:24px;
+  }
+  .countdown b{ color:var(--red); }
+
+  footer{
+    text-align:center;
+    padding:40px 24px 60px;
+    font-size:12.5px;
+    color:#9A93AF;
+    border-top:1px solid var(--line);
+  }
+
+  @media (max-width:560px){
+    section{ padding:52px 0; }
+    .module{ grid-template-columns:36px 1fr; }
+    .module .val{ grid-column:2; margin-top:4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">⚠ Founding cohort — <b>price rises to ₦35,000</b> once the first 40 seats are filled</div>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-badge">
+      <span class="avatar-stack">
+        <span style="background:#8B5CF6;">A</span>
+        <span style="background:#DB2777;">C</span>
+        <span style="background:#0F766E;">F</span>
+      </span>
+      The System <b>One Client Already Paid $750 For</b>
+    </div>
+    <h1>While Your Mates Wait On a <span class="strike-word">₦150,000</span> Job Offer, <span class="highlight-word">$750</span> Landed In My Account From One Website.</h1>
+    <p class="hero-sub" style="margin-left:auto; margin-right:auto; color:#B7B9CE;">A one-time course teaching you to build multi-page websites with AI and sell them to clients abroad — paid in dollars, built from a real project I delivered myself.</p>
+
+    <div class="stat-row">
+      <div class="stat-col"><div class="num">$750</div><div class="lbl">From One Client</div></div>
+      <div class="stat-col"><div class="num">4</div><div class="lbl">Pages Built With AI</div></div>
+      <div class="stat-col"><div class="num">14</div><div class="lbl">Day Refund Window</div></div>
+      <div class="stat-col"><div class="num">₦20K</div><div class="lbl">One-Time Price</div></div>
+    </div>
+
+    <div class="hero-cta-wrap">
+      <a class="cta-btn" href="#buy">Show Me the Method for ₦20,000 →</a>
+      <div class="cta-sub">⚡ <b style="color:#F0C863;">Instant access.</b> Founding cohort — first 40 seats only.</div>
+      <div class="cta-sub" style="margin-top:14px;">🔒 SECURE PAYSTACK &nbsp; ⚡ INSTANT DELIVERY &nbsp; 🛡️ 14-DAY REFUND &nbsp; 📱 PHONE OR LAPTOP</div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== PAIN ===================== -->
+<section class="dark">
+  <div class="wrap">
+    <div class="eyebrow">BE HONEST WITH YOURSELF</div>
+    <h2 style="font-size:clamp(26px,4vw,34px);">Aren't you tired of earning in Naira for skills the world pays in dollars?</h2>
+    <div class="pain-list">
+      <div class="pain-item">
+        <span class="n">01</span>
+        <p>Aren't you tired of watching people online say <b>"just landed a client"</b> while you're still trying to figure out where to even find one?</p>
+      </div>
+      <div class="pain-item">
+        <span class="n">02</span>
+        <p>Aren't you tired of being told you need years of design school or a coding bootcamp before anyone abroad will trust you with their website?</p>
+      </div>
+      <div class="pain-item">
+        <span class="n">03</span>
+        <p>Aren't you tired of your skills being paid for in a currency that keeps losing value, while foreign clients pay the same skill in dollars?</p>
+      </div>
+      <div class="pain-item">
+        <span class="n">04</span>
+        <p>Aren't you tired of thinking you need capital, a laptop upgrade, or a team before you can start? <b>One client and a phone is often enough to begin.</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHAT YOU GET ===================== -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">WHAT'S INSIDE</div>
+    <h2 style="font-size:clamp(26px,4vw,32px); margin-bottom:8px;">The Zero to Foreign Client System</h2>
+    <p style="color:var(--ink-soft); margin-bottom:28px;">A step-by-step path from "I don't know where to start" to a delivered multi-page website with a paying foreign client.</p>
+
+    <div class="module">
+      <div class="num">01</div>
+      <div><h3>Building Multi-Page Websites With AI</h3><p>The exact AI-assisted workflow to go from a blank prompt to a polished homepage, about, services, and contact page — without writing code from scratch.</p></div>
+      <div class="val">₦15,000 value</div>
+    </div>
+    <div class="module">
+      <div class="num">02</div>
+      <div><h3>Finding &amp; Winning Foreign Clients</h3><p>Where international clients actually look for website builders, how to pitch in a way that earns trust fast, and how to price in dollars with confidence.</p></div>
+      <div class="val">₦15,000 value</div>
+    </div>
+    <div class="module">
+      <div class="num">03</div>
+      <div><h3>Getting Paid &amp; Delivering Professionally</h3><p>How to invoice, receive international payments, and hand over a finished site the way that earns you repeat clients and referrals.</p></div>
+      <div class="val">₦10,000 value</div>
+    </div>
+    <div class="module">
+      <div class="num">04</div>
+      <div><h3>Turning One Skill Into Recurring Income</h3><p>How the same skillset extends into ongoing site maintenance retainers and simple subscription-based tools you can build and license monthly.</p></div>
+      <div class="val">₦15,000 value</div>
+    </div>
+    <div class="module">
+      <div class="num">05</div>
+      <div><h3>Private Community</h3><p>A space to ask questions, share client wins, and get unstuck instead of building alone.</p></div>
+      <div class="val">Priceless</div>
+    </div>
+
+    <div class="value-total">
+      <div class="label">Total value</div>
+      <div class="amt">₦55,000+</div>
+    </div>
+    <div class="value-total" style="border-top:1px solid var(--line); margin-top:14px; padding-top:20px;">
+      <div class="label">Your price today</div>
+      <div class="amt"><span class="strike">₦35,000</span>₦20,000</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROOF ===================== -->
+<section style="background:var(--paper-dim);">
+  <div class="wrap">
+    <div class="eyebrow">REAL PROOF, NOT PROJECTIONS</div>
+    <h2 style="font-size:clamp(26px,4vw,32px); margin-bottom:24px;">What this skill has actually done for me — as a student</h2>
+
+    <div class="proof-card">
+      <div class="proof-tag">Client payment</div>
+      <h3>One foreign client, one project</h3>
+      <div class="proof-figure">$750</div>
+      <p>Paid for a multi-page website built with the exact process taught in this course. Screenshot available inside the community.</p>
+    </div>
+
+    <div class="proof-card">
+      <div class="proof-tag">What it funded</div>
+      <h3>Bought a device worth over ₦1,100,000</h3>
+      <p>Within two months of applying this skill consistently — while still a full-time student.</p>
+    </div>
+
+    <div class="proof-card">
+      <div class="proof-tag">What it funded</div>
+      <h3>Rented my own ₦900,000 apartment</h3>
+      <p>As a student at a federal university, without depending on family for it — funded from freelance income earned with this skill.</p>
+    </div>
+
+    <div class="proof-card">
+      <div class="proof-tag">Where this goes next</div>
+      <h3>Beyond one-off projects</h3>
+      <p>People I know personally have taken this same web-building skill further into small software tools they rent out to clients monthly — a natural next step once you're comfortable building and delivering sites.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GUARANTEE ===================== -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">LOW RISK</div>
+    <div class="guarantee-box">
+      <h3>Try the system for 14 days</h3>
+      <p style="color:var(--ink-soft); font-size:14.5px;">Go through the modules and start applying them. If you've genuinely put in the work within 14 days and feel it wasn't worth ₦20,000, message me directly and we'll sort out a refund.</p>
+      <div class="check-list">
+        <div><span class="mark">✓</span> 14 days to go through the material</div>
+        <div><span class="mark">✓</span> Direct message access to me, not a support inbox</div>
+        <div><span class="mark">✓</span> Paid securely through Paystack</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section style="background:var(--paper-dim);">
+  <div class="wrap">
+    <div class="eyebrow">QUESTIONS ANSWERED</div>
+    <h2 style="font-size:clamp(26px,4vw,32px); margin-bottom:20px;">You asked. Here's the truth.</h2>
+
+    <div class="faq-item">
+      <button class="faq-q">Do I need to know how to code? <span class="plus">+</span></button>
+      <div class="faq-a">No. You'll be using AI tools to generate the site structure and content — you're learning to direct the process, not write code line by line.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Do I need a laptop? <span class="plus">+</span></button>
+      <div class="faq-a">A laptop makes the workflow smoother, but the core building process can be done from a phone if that's all you have right now.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How do I actually find foreign clients? <span class="plus">+</span></button>
+      <div class="faq-a">Module 2 walks through where to look, how to present past work (even just one project), and how to pitch without sounding like a beginner.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">I'm a student with classes. Will this fit? <span class="plus">+</span></button>
+      <div class="faq-a">Yes — this is exactly how I built it, around lectures and exams. Most modules are short and built to apply in spare hours, not full days.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What if I don't get a client right away? <span class="plus">+</span></button>
+      <div class="faq-a">That's normal — most people don't land their first client in week one. The community and the 14-day guarantee exist so you're not stuck figuring it out alone.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section id="buy" class="final-cta">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">FOUNDING COHORT — 40 SEATS</div>
+    <h2 style="font-size:clamp(26px,4.5vw,34px);">Get the system that landed a $750 client.</h2>
+    <div class="price-row">
+      <span class="old">₦35,000</span>
+      <span class="new">₦20,000</span>
+    </div>
+    <div class="countdown">Price rises once founding seats are gone — <b><span id="seats">40</span> left</b> at this price</div>
+    <a class="cta-btn" href="#" id="payLink">I Want In — Get Instant Access →</a>
+    <div class="cta-sub">🔒 Secure Paystack · ⚡ Instant delivery · 🛡️ 14-day guarantee</div>
+  </div>
+</section>
+
+<footer>
+  © 2026 — All rights reserved. Results described are the seller's own, from real client work. Individual results depend on effort and application of the material.
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      btn.parentElement.classList.toggle('open');
+    });
+  });
+
+  // Replace with your real Paystack payment link before deploying
+  document.getElementById('payLink').href = "https://paystack.shop/pay/REPLACE_WITH_YOUR_LINK";
+  document.querySelector('.hero .cta-btn').href = "#buy";
+</script>
+
+</body>
+</html>
