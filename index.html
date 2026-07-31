@@ -419,6 +419,80 @@
   }
   .countdown b{ color:var(--red); }
 
+  /* ---------- Timer box ---------- */
+  .timer-box{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    background:var(--paper-dim);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 22px;
+    margin:0 auto 22px;
+  }
+  .timer-box .lbl{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--red);
+  }
+  .timer-box .clock{
+    font-family:'JetBrains Mono', monospace;
+    font-size:24px;
+    font-weight:700;
+    color:var(--ink);
+    letter-spacing:0.02em;
+  }
+  .timer-expired{ color:var(--ink-soft); font-style:italic; font-size:14px; }
+
+  /* ---------- Seats progress bar ---------- */
+  .seats-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    max-width:420px;
+    margin:0 auto 28px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .seats-bar{
+    flex:1;
+    height:6px;
+    background:var(--line);
+    border-radius:99px;
+    overflow:hidden;
+  }
+  .seats-bar-fill{
+    height:100%;
+    background:var(--gold-deep);
+    border-radius:99px;
+  }
+
+  /* ---------- Sign-up toast ---------- */
+  .signup-toast{
+    position:fixed;
+    left:18px;
+    bottom:18px;
+    background:var(--ink);
+    color:var(--paper);
+    padding:12px 18px;
+    border-radius:10px;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    box-shadow:0 14px 34px -14px rgba(20,24,43,0.5);
+    transform:translateY(120%);
+    opacity:0;
+    transition:transform .35s ease, opacity .35s ease;
+    z-index:999;
+    max-width:280px;
+  }
+  .signup-toast.show{ transform:translateY(0); opacity:1; }
+  .signup-toast .dot{ width:8px; height:8px; border-radius:50%; background:var(--green); flex-shrink:0; }
+
   footer{
     text-align:center;
     padding:40px 24px 60px;
@@ -668,15 +742,95 @@
       <span class="old">₦40,000</span>
       <span class="new">₦25,000</span>
     </div>
-    <div class="countdown">Price rises once founding seats are gone. <b><span id="seats">40</span> left</b> at this price</div>
+
+    <div class="timer-box">
+      <span class="lbl">Offer window closes in</span>
+      <span class="clock" id="clock">24:00:00</span>
+    </div>
+
+    <div class="seats-row">
+      <span>🔥 Only <b id="seatsLeftText">40</b> seats left</span>
+      <div class="seats-bar"><div class="seats-bar-fill" id="seatsBarFill" style="width:100%"></div></div>
+      <span id="seatsTotalText">40</span>
+    </div>
+
     <a class="cta-btn" href="#" id="payLink">I Want In. Get Instant Access →</a>
     <div class="cta-sub">🔒 Secure Paystack · ⚡ Instant delivery · 🛡️ 14-day guarantee</div>
   </div>
 </section>
 
+<div class="signup-toast" id="signupToast">
+  <span class="dot"></span>
+  <span id="signupToastText"></span>
+</div>
+
 <footer>
   © 2026. All rights reserved. Results described are the seller's own, from real client work. Individual results depend on effort and application of the material.
 </footer>
+
+<script>
+  // ---- Real 24h offer countdown, persisted per visitor so it doesn't fake-reset on refresh ----
+  (function(){
+    const KEY = 'offerDeadline';
+    const DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours, set an honest window you'll actually honor
+    let deadline = localStorage.getItem(KEY);
+    if(!deadline){
+      deadline = Date.now() + DURATION_MS;
+      localStorage.setItem(KEY, deadline);
+    } else {
+      deadline = parseInt(deadline, 10);
+    }
+    const clockEl = document.getElementById('clock');
+    function tick(){
+      const remaining = deadline - Date.now();
+      if(remaining <= 0){
+        clockEl.textContent = 'Closed';
+        clockEl.classList.add('timer-expired');
+        clearInterval(timerHandle);
+        return;
+      }
+      const h = Math.floor(remaining / 3600000);
+      const m = Math.floor((remaining % 3600000) / 60000);
+      const s = Math.floor((remaining % 60000) / 1000);
+      clockEl.textContent = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    }
+    tick();
+    const timerHandle = setInterval(tick, 1000);
+  })();
+
+  // ---- Seats left, edit SEATS_TOTAL and SEATS_TAKEN by hand as real signups come in ----
+  (function(){
+    const SEATS_TOTAL = 40;
+    const SEATS_TAKEN = 0; // update this manually as real people actually pay
+    const left = SEATS_TOTAL - SEATS_TAKEN;
+    document.getElementById('seatsLeftText').textContent = left;
+    document.getElementById('seatsTotalText').textContent = SEATS_TOTAL;
+    document.getElementById('seatsBarFill').style.width = (left / SEATS_TOTAL * 100) + '%';
+    document.getElementById('seats').textContent = left;
+  })();
+
+  // ---- Real sign-up toast. Empty by default, only shows entries you actually add below. ----
+  (function(){
+    // Add a real entry here each time someone genuinely pays, e.g. "Someone from Lagos just joined"
+    // Do not invent names or cities that didn't happen, this list should only ever contain real signups.
+    const REAL_SIGNUPS = [
+      // "Someone from Lagos just joined",
+      // "Someone from Abuja just joined",
+    ];
+    if(REAL_SIGNUPS.length === 0) return; // nothing to show until real signups exist
+    const toast = document.getElementById('signupToast');
+    const textEl = document.getElementById('signupToastText');
+    let i = 0;
+    function showNext(){
+      textEl.textContent = REAL_SIGNUPS[i % REAL_SIGNUPS.length];
+      toast.classList.add('show');
+      setTimeout(()=> toast.classList.remove('show'), 4500);
+      i++;
+    }
+    setTimeout(showNext, 6000);
+    setInterval(showNext, 18000);
+  })();
+</script>
 
 <script>
   // FAQ accordion
