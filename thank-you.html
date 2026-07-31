@@ -74,6 +74,21 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     color:#D9DAE6;
   }
   .next-steps li{ margin-bottom:8px; margin-left:18px; }
+  .whatsapp-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    background:#25D366;
+    color:#0A0A10;
+    font-weight:700;
+    font-size:15px;
+    padding:15px 24px;
+    border-radius:8px;
+    text-decoration:none;
+    margin-top:24px;
+    width:100%;
+  }
 </style>
 </head>
 <body>
@@ -87,6 +102,13 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
       <li>Join the private community group (link in the welcome email)</li>
       <li>Start with Module 1 today, momentum matters most in week one</li>
     </ul>
+
+    <a class="whatsapp-btn" id="waBtn" href="#" target="_blank" rel="noopener">💬 Confirm your payment on WhatsApp</a>
   </div>
+
+  <script>
+    var message = "Hi Josh, I just made payment for your Zero To Foreign Client Cohort. Here are my details:\nName: \nEmail: ";
+    document.getElementById('waBtn').href = "https://wa.me/2349160013685?text=" + encodeURIComponent(message);
+  </script>
 </body>
 </html>
