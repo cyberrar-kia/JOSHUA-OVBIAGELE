@@ -883,12 +883,17 @@
   (function(){
     const KEY = 'offerDeadline';
     const DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours, set an honest window you'll actually honor
-    let deadline = localStorage.getItem(KEY);
-    if(!deadline){
-      deadline = Date.now() + DURATION_MS;
-      localStorage.setItem(KEY, deadline);
-    } else {
-      deadline = parseInt(deadline, 10);
+    let deadline;
+    try{
+      const stored = localStorage.getItem(KEY);
+      if(stored){
+        deadline = parseInt(stored, 10);
+      } else {
+        deadline = Date.now() + DURATION_MS;
+        localStorage.setItem(KEY, deadline);
+      }
+    } catch(e){
+      deadline = Date.now() + DURATION_MS; // storage blocked, fall back to a per-load timer
     }
     const clockEl = document.getElementById('clock');
     function tick(){
@@ -916,7 +921,6 @@
     document.getElementById('seatsLeftText').textContent = left;
     document.getElementById('seatsTotalText').textContent = SEATS_TOTAL;
     document.getElementById('seatsBarFill').style.width = (left / SEATS_TOTAL * 100) + '%';
-    document.getElementById('seats').textContent = left;
     document.getElementById('guaranteeSeatsLeft').textContent = left;
     document.getElementById('seatsLeftText2').textContent = left;
     document.getElementById('seatsTotalText2').textContent = SEATS_TOTAL;
