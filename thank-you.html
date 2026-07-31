@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In! - Zero to Foreign Client</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1447722983356860');
+fbq('track', 'PageView');
+// This fires only when someone actually lands here, which only happens after a real successful Paystack payment
+fbq('track', 'Purchase', {value: 25000, currency: 'NGN'});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:#0A0A10;
+    color:#fff;
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .card{
+    max-width:480px;
+    text-align:center;
+  }
+  .check{
+    width:64px; height:64px;
+    border-radius:50%;
+    background:rgba(29,110,76,0.15);
+    border:1.5px solid #1D6E4C;
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 24px;
+    font-size:28px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-size:clamp(26px,5vw,34px);
+    margin-bottom:14px;
+  }
+  p{
+    color:#B7B9CE;
+    font-size:15.5px;
+    line-height:1.6;
+    margin-bottom:10px;
+  }
+  .next-steps{
+    text-align:left;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:10px;
+    padding:20px 22px;
+    margin-top:26px;
+    font-size:14.5px;
+    color:#D9DAE6;
+  }
+  .next-steps li{ margin-bottom:8px; margin-left:18px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="check">✓</div>
+    <h1>You're in.</h1>
+    <p>Payment received, welcome to the founding cohort.</p>
+    <p>Check your email (and spam folder) for your access details. If it hasn't arrived in 15 minutes, message me directly.</p>
+    <ul class="next-steps">
+      <li>Check your inbox for the login/access link</li>
+      <li>Join the private community group (link in the welcome email)</li>
+      <li>Start with Module 1 today, momentum matters most in week one</li>
+    </ul>
+  </div>
+</body>
+</html>
