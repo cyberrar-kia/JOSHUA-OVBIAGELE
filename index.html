@@ -365,11 +365,55 @@
     border-radius:12px;
     padding:30px;
     background:linear-gradient(180deg, #FFFCF4, var(--paper));
+    text-align:center;
   }
   .guarantee-box h3{ font-size:20px; margin-bottom:10px; }
-  .check-list{ margin-top:14px; }
+  .guarantee-box p{ text-align:left; }
+  .check-list{ margin-top:14px; display:inline-block; text-align:left; }
   .check-list div{ display:flex; gap:10px; margin-bottom:8px; font-size:14.5px; color:var(--ink-soft); }
   .check-list .mark{ color:var(--green); font-weight:700; }
+
+  .refund-spotlight{
+    margin:18px auto 22px;
+    max-width:360px;
+    border-radius:10px;
+    padding:16px 20px;
+    border:1.5px solid var(--gold-deep);
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(120deg, #FFFCF4, #FFF3D6, #FFFCF4);
+  }
+  .refund-spotlight::before{
+    content:"";
+    position:absolute;
+    top:0; left:-150%;
+    width:150%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,209,110,0.65), transparent);
+    animation:spotlight-sweep 2.4s ease-in-out infinite;
+  }
+  @keyframes spotlight-sweep{
+    0%{ left:-150%; }
+    100%{ left:150%; }
+  }
+  .refund-spotlight .num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:36px;
+    font-weight:700;
+    color:var(--gold-deep);
+    position:relative;
+    z-index:1;
+    line-height:1.1;
+  }
+  .refund-spotlight .lbl{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:0.07em;
+    color:var(--ink-soft);
+    position:relative;
+    z-index:1;
+    margin-top:4px;
+  }
 
   /* ---------- FAQ ---------- */
   .faq-item{ border-bottom:1px solid var(--line); }
@@ -693,7 +737,13 @@
   <div class="wrap">
     <div class="eyebrow">LOW RISK</div>
     <div class="guarantee-box">
-      <h3>Try the system for 14 days</h3>
+      <h3>14-Day Refund Window</h3>
+
+      <div class="refund-spotlight">
+        <div class="num">Only <span id="guaranteeSeatsLeft">19</span> spots</div>
+        <div class="lbl">Covered by this refund window. Founding cohort only.</div>
+      </div>
+
       <p style="color:var(--ink-soft); font-size:14.5px;">Go through the modules and start applying them. If you've genuinely put in the work within 14 days after you join this cohort and feel it wasn't worth ₦25,000, message me directly and we'll sort out a refund.</p>
       <p style="color:var(--ink-soft); font-size:14.5px; margin-top:10px;">This refund window is open for the first 19 people who register. You'll be directly inside my close circle, with hands-on guidance, so you get the most out of the 14 days.</p>
       <div class="check-list">
@@ -809,6 +859,7 @@
     document.getElementById('seatsTotalText').textContent = SEATS_TOTAL;
     document.getElementById('seatsBarFill').style.width = (left / SEATS_TOTAL * 100) + '%';
     document.getElementById('seats').textContent = left;
+    document.getElementById('guaranteeSeatsLeft').textContent = left;
   })();
 
   // ---- Real sign-up toast. Empty by default, only shows entries you actually add below. ----
