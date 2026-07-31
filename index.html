@@ -1028,12 +1028,13 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     });
   });
 
-  // Replace with your real Paystack payment link before deploying
-  document.getElementById('payLink').href = "https://paystack.shop/pay/zero-to-foreign-client";
-  document.getElementById('payLink').addEventListener('click', function(){
-    if(typeof fbq === 'function'){ fbq('track', 'InitiateCheckout'); }
+  // Send every CTA button on the page straight to Paystack, not just the final one
+  document.querySelectorAll('.cta-btn').forEach(function(btn){
+    btn.href = "https://paystack.shop/pay/zero-to-foreign-client";
+    btn.addEventListener('click', function(){
+      if(typeof fbq === 'function'){ fbq('track', 'InitiateCheckout'); }
+    });
   });
-  document.querySelector('.hero .cta-btn').href = "#buy";
 </script>
 
 </body>
