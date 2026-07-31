@@ -137,6 +137,48 @@
     margin-bottom:32px;
   }
 
+  /* ---------- Income ladder ---------- */
+  .ladder-section{ padding:56px 0 64px; }
+  .ladder{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:28px; align-items:stretch; }
+  .ladder-step{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:26px 18px;
+    text-align:center;
+    background:#fff;
+  }
+  .ladder-step.peak{
+    border-color:var(--gold-deep);
+    background:linear-gradient(180deg,#FFFCF4,#fff);
+    box-shadow:0 16px 34px -20px rgba(156,116,18,0.5);
+  }
+  .ladder-step .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:#9A93AF;
+    margin-bottom:12px;
+  }
+  .ladder-step .amt{
+    font-family:'JetBrains Mono', monospace;
+    font-size:26px;
+    font-weight:700;
+    color:var(--ink);
+    margin-bottom:8px;
+  }
+  .ladder-step.peak .amt{ color:var(--gold-deep); font-size:30px; }
+  .ladder-step .desc{ font-size:13px; color:var(--ink-soft); line-height:1.5; }
+  .ladder-note{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-top:20px;
+    font-style:italic;
+  }
+  @media (max-width:640px){
+    .ladder{ grid-template-columns:1fr; }
+  }
+
   /* browser mockup — signature element */
   .browser{
     margin:36px 0 32px;
@@ -415,6 +457,33 @@
     </div>
   </div>
 </header>
+
+<section class="ladder-section">
+  <div class="wrap">
+    <div class="eyebrow">WHERE THIS CAN GO</div>
+    <h2 style="font-size:clamp(24px,3.8vw,30px); margin-bottom:6px;">One website is the start. This skill doesn't stop at $750.</h2>
+    <p style="color:var(--ink-soft); font-size:14.5px; max-width:56ch;">The same skillset scales in stages. Here's the honest path, not a promise, a real ceiling worth aiming for.</p>
+
+    <div class="ladder">
+      <div class="ladder-step">
+        <div class="tag">Where You Start</div>
+        <div class="amt">$750</div>
+        <div class="desc">One project. One foreign client. The exact result already proven in this system.</div>
+      </div>
+      <div class="ladder-step">
+        <div class="tag">Where Most People Settle</div>
+        <div class="amt">$150–400/mo</div>
+        <div class="desc">A handful of clients paying for ongoing site care and small updates. Steady, recurring income.</div>
+      </div>
+      <div class="ladder-step peak">
+        <div class="tag">Where This Can Go</div>
+        <div class="amt">$5,000/mo</div>
+        <div class="desc">Package the same skill into a subscription tool and rent it to multiple clients every month. Someone I personally know is doing exactly this right now.</div>
+      </div>
+    </div>
+    <p class="ladder-note">This is Module 4 territory, not something you need on day one. It's here so you know the ceiling isn't $750.</p>
+  </div>
+</section>
 
 <!-- ===================== PAIN ===================== -->
 <section class="dark">
