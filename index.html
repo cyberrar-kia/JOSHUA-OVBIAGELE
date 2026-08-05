@@ -965,12 +965,13 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     }
     const clockEl = document.getElementById('clock');
     function tick(){
-      const remaining = deadline - Date.now();
+      let remaining = deadline - Date.now();
       if(remaining <= 0){
-        clockEl.textContent = 'Closed';
-        clockEl.classList.add('timer-expired');
-        clearInterval(timerHandle);
-        return;
+        // A real cycle actually finished, start a genuine new one rather than
+        // freezing on "Closed" or resetting just because someone refreshed mid-cycle.
+        deadline = Date.now() + DURATION_MS;
+        try{ localStorage.setItem(KEY, deadline); } catch(e){}
+        remaining = deadline - Date.now();
       }
       const h = Math.floor(remaining / 3600000);
       const m = Math.floor((remaining % 3600000) / 60000);
