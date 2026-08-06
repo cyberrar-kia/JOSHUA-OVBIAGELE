@@ -212,19 +212,44 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     .ladder{ grid-template-columns:1fr; }
   }
 
+  .video-wrap{
+    position:relative;
+    max-width:520px;
+    margin:28px auto;
+  }
   .hero-video{
     width:100%;
-    max-width:520px;
     aspect-ratio:720/540;
     object-fit:cover;
     display:block;
-    margin:28px auto;
     border-radius:12px;
     border:1px solid var(--line);
     background:#000;
   }
+  .hero-video::-webkit-media-controls-overlay-play-button{ display:none !important; }
+  .hero-video::-webkit-media-controls-start-playback-button{ display:none !important; -webkit-appearance:none; }
+  .custom-play{
+    position:absolute;
+    left:16px;
+    bottom:16px;
+    width:52px; height:52px;
+    border-radius:50%;
+    background:rgba(0,0,0,0.65);
+    border:1px solid rgba(255,255,255,0.35);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    z-index:2;
+  }
+  .custom-play::after{
+    content:"";
+    border-style:solid;
+    border-width:9px 0 9px 15px;
+    border-color:transparent transparent transparent #fff;
+    margin-left:4px;
+  }
+  .custom-play.hidden{ display:none; }
   @media (max-width:560px){
-    .hero-video{ max-width:100%; }
+    .video-wrap{ max-width:100%; }
   }
 
   /* browser mockup — signature element */
@@ -698,9 +723,12 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     </div>
     <h1>While Your Mates Wait On a <span class="strike-word">₦150,000</span> Job Offer, <span class="highlight-word">$750</span> Landed In My Account From One Website.</h1>
 
-    <video class="hero-video" controls playsinline preload="metadata" poster="assets/hero-poster.jpg">
-      <source src="assets/hero-video.mp4" type="video/mp4">
-    </video>
+    <div class="video-wrap">
+      <video class="hero-video" id="heroVideo" controls playsinline preload="metadata" poster="assets/hero-poster.jpg">
+        <source src="assets/hero-video.mp4" type="video/mp4">
+      </video>
+      <button class="custom-play" id="customPlay" aria-label="Play video"></button>
+    </div>
 
     <p class="hero-sub" style="margin-left:auto; margin-right:auto; color:#B7B9CE;">One project. One foreign client. Paid in full, in dollars, built entirely with AI. No tech skills needed. No audience required. No startup capital either. This is the exact step-by-step system, so you can do the same.</p>
 
@@ -1012,13 +1040,13 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
 
   // ---- Real sign-up toast. Empty by default, only shows entries you actually add below. ----
   (function(){
-    // Add a real entry here each time someone genuinely pays, e.g. "Someone from Lagos just joined"
+    // Add a real entry here each time someone genuinely pays, e.g. "Someone from Lagos just registered"
     // Do not invent names or cities that didn't happen, this list should only ever contain real signups.
     const REAL_SIGNUPS = [
-      "Daniel just joined",
-      "Tega just joined",
-      "Temi just joined",
-      "Maro just joined",
+      "Daniel just registered",
+      "Tega just registered",
+      "Temi just registered",
+      "Maro just registered",
     ];
     if(REAL_SIGNUPS.length === 0) return; // nothing to show until real signups exist
     const toast = document.getElementById('signupToast');
@@ -1044,6 +1072,19 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
   });
 
   // Send every CTA button on the page straight to Paystack, not just the final one
+  // Custom small play button so it doesn't cover the cover image's key text
+  (function(){
+    const video = document.getElementById('heroVideo');
+    const playBtn = document.getElementById('customPlay');
+    if(!video || !playBtn) return;
+    playBtn.addEventListener('click', function(){
+      video.play();
+    });
+    video.addEventListener('play', function(){ playBtn.classList.add('hidden'); });
+    video.addEventListener('pause', function(){ playBtn.classList.remove('hidden'); });
+    video.addEventListener('ended', function(){ playBtn.classList.remove('hidden'); });
+  })();
+
   document.querySelectorAll('.cta-btn').forEach(function(btn){
     btn.href = "https://paystack.shop/pay/zero-to-foreign-client";
     btn.addEventListener('click', function(){
