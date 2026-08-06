@@ -654,21 +654,23 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     bottom:18px;
     background:var(--ink);
     color:var(--paper);
-    padding:12px 18px;
-    border-radius:10px;
-    font-size:13px;
+    padding:16px 22px;
+    border-radius:12px;
+    font-size:14.5px;
+    font-weight:600;
     display:flex;
     align-items:center;
-    gap:10px;
-    box-shadow:0 14px 34px -14px rgba(20,24,43,0.5);
-    transform:translateY(120%);
+    gap:12px;
+    box-shadow:0 18px 40px -12px rgba(20,24,43,0.55);
+    border:1.5px solid #F0C863;
+    transform:translateY(120%) scale(0.92);
     opacity:0;
-    transition:transform .35s ease, opacity .35s ease;
+    transition:transform .4s cubic-bezier(.34,1.56,.64,1), opacity .3s ease;
     z-index:999;
-    max-width:280px;
+    max-width:320px;
   }
-  .signup-toast.show{ transform:translateY(0); opacity:1; }
-  .signup-toast .dot{ width:8px; height:8px; border-radius:50%; background:var(--green); flex-shrink:0; }
+  .signup-toast.show{ transform:translateY(0) scale(1); opacity:1; }
+  .signup-toast .dot{ width:10px; height:10px; border-radius:50%; background:var(--green); flex-shrink:0; box-shadow:0 0 0 4px rgba(29,110,76,0.25); }
 
   footer{
     text-align:center;
@@ -855,6 +857,11 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     </div>
     <div class="module">
       <div class="num">06</div>
+      <div><h3>Watch Me Build &amp; Deliver a $1,000 App Prototype, Live</h3><p>Exclusive to the first 19 founding members: watch me build and deliver a real $1,000 app prototype for an actual client, live, from first message to final handover.</p></div>
+      <div class="val">Founding 19 only</div>
+    </div>
+    <div class="module">
+      <div class="num">07</div>
       <div><h3>Private Community</h3><p>A space to ask questions, share client wins, and get unstuck instead of building alone.</p></div>
       <div class="val">Priceless</div>
     </div>
