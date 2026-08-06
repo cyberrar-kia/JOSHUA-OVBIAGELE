@@ -749,6 +749,10 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
 
     <div class="hero-cta-wrap">
       <a class="cta-btn" href="#buy">Show Me the Method for ₦25,000 →</a>
+      <div class="timer-box" style="margin-top:16px;">
+        <span class="lbl">Offer closes in</span>
+        <span class="clock" id="clockHero">24:00:00</span>
+      </div>
       <div class="cta-sub">⚡ <b style="color:#F0C863;">Instant access.</b> Founding cohort, first 19 seats only.</div>
       <div class="cta-sub" style="margin-top:14px;">🔒 SECURE PAYSTACK &nbsp; ⚡ INSTANT DELIVERY &nbsp; 🛡️ 14-DAY REFUND &nbsp; 📱 PHONE OR LAPTOP</div>
     </div>
@@ -1023,6 +1027,7 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
       deadline = Date.now() + DURATION_MS; // storage blocked, fall back to a per-load timer
     }
     const clockEl = document.getElementById('clock');
+    const clockElHero = document.getElementById('clockHero');
     function tick(){
       let remaining = deadline - Date.now();
       if(remaining <= 0){
@@ -1035,7 +1040,9 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
       const h = Math.floor(remaining / 3600000);
       const m = Math.floor((remaining % 3600000) / 60000);
       const s = Math.floor((remaining % 60000) / 1000);
-      clockEl.textContent = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+      const text = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+      clockEl.textContent = text;
+      if(clockElHero) clockElHero.textContent = text;
     }
     tick();
     const timerHandle = setInterval(tick, 1000);
