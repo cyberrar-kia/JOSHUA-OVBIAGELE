@@ -212,6 +212,19 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     .ladder{ grid-template-columns:1fr; }
   }
 
+  .hero-video{
+    width:100%;
+    max-width:420px;
+    display:block;
+    margin:28px auto;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:#000;
+  }
+  @media (max-width:560px){
+    .hero-video{ max-width:100%; }
+  }
+
   /* browser mockup — signature element */
   .browser{
     margin:36px 0 32px;
@@ -683,10 +696,9 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     </div>
     <h1>While Your Mates Wait On a <span class="strike-word">₦150,000</span> Job Offer, <span class="highlight-word">$750</span> Landed In My Account From One Website.</h1>
 
-    <div class="video-frame" style="margin:28px auto;">
-      <div class="play-icon"></div>
-      <div class="video-label">Video walkthrough coming soon</div>
-    </div>
+    <video class="hero-video" controls playsinline preload="metadata" poster="assets/hero-poster.jpg">
+      <source src="assets/hero-video.mp4" type="video/mp4">
+    </video>
 
     <p class="hero-sub" style="margin-left:auto; margin-right:auto; color:#B7B9CE;">One project. One foreign client. Paid in full, in dollars, built entirely with AI. No tech skills needed. No audience required. No startup capital either. This is the exact step-by-step system, so you can do the same.</p>
 
