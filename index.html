@@ -1073,28 +1073,45 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     document.getElementById('seatsBarFill2').style.width = (left / SEATS_TOTAL * 100) + '%';
   })();
 
-  // ---- Real sign-up toast. Empty by default, only shows entries you actually add below. ----
+  // ---- Real sign-up toast. Only contains real Founding Cohort customer first names. ----
   (function(){
-    // Add a real entry here each time someone genuinely pays, e.g. "Someone from Lagos just registered"
-    // Do not invent names or cities that didn't happen, this list should only ever contain real signups.
+    // Add a real entry here each time someone genuinely pays.
+    // Do not invent names, this list should only ever contain real Founding Cohort buyers.
     const REAL_SIGNUPS = [
-      "Daniel just registered",
-      "Tega just registered",
-      "Temi just registered",
-      "Maro just registered",
+      "Daniel", "Tega", "Temi", "Maro",
+      "Anasemi", "Young", "Ogbonna", "Olayinka", "Inegbenoise", "Cecilia",
+      "Piemeu", "Akintujoye", "Sixtus", "Obafemi", "Abdulrahmon", "Aaron",
+      "Matiekepai", "Ayinla", "Kubiat-Abasi", "Abasiono", "John", "Abiodun",
+      "Abigail", "Abdulazeez", "Abdulquadri", "Adekola", "Abdullahi",
+      "Abdulqudus", "Adenike", "Lekwen", "Annie", "Ayomide", "Abiola",
+      "Abioye", "Abodunde", "Charles", "Udeme", "Oyinkansola", "Kingsley",
+      "Daramola", "Naheem", "Adebisi", "Ibukunolowa", "Adebiyi", "Bodunde",
     ];
     if(REAL_SIGNUPS.length === 0) return; // nothing to show until real signups exist
+
     const toast = document.getElementById('signupToast');
     const textEl = document.getElementById('signupToastText');
+
+    // Shuffle once per page load, then show each real name at most once per session
+    // (avoids the same name appearing twice in a row while someone's on the page).
+    const shuffled = REAL_SIGNUPS.slice();
+    for(let i = shuffled.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
     let i = 0;
     function showNext(){
-      textEl.textContent = REAL_SIGNUPS[i % REAL_SIGNUPS.length];
+      if(i >= shuffled.length) return; // seen every real name this session, stop
+      textEl.textContent = shuffled[i] + " just registered";
       toast.classList.add('show');
       setTimeout(()=> toast.classList.remove('show'), 4500);
       i++;
     }
     setTimeout(showNext, 8000);
-    setInterval(showNext, 180000); // every 3 minutes
+    const intervalHandle = setInterval(function(){
+      if(i >= shuffled.length){ clearInterval(intervalHandle); return; }
+      showNext();
+    }, 180000); // every 3 minutes
   })();
 </script>
 
