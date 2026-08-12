@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In! - Zero to Foreign Client</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<!-- Meta Pixel Code — SEPARATE pixel for the offer.html backup campaign, not the main site's pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'REPLACE_WITH_NEW_PIXEL_ID');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=REPLACE_WITH_NEW_PIXEL_ID&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:#0F1222;
+    color:#fff;
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .card{ max-width:480px; text-align:center; }
+  .check{
+    width:64px; height:64px;
+    border-radius:50%;
+    background:rgba(59,91,255,0.15);
+    border:1.5px solid #3B5BFF;
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 24px;
+    font-size:28px;
+  }
+  h1{ font-size:clamp(26px,5vw,34px); margin-bottom:14px; font-weight:800; }
+  p{ color:#B8BBD1; font-size:15.5px; line-height:1.6; margin-bottom:10px; }
+  .next-steps{
+    text-align:left;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:10px;
+    padding:20px 22px;
+    margin-top:26px;
+    font-size:14.5px;
+    color:#D9DAE6;
+  }
+  .next-steps li{ margin-bottom:8px; margin-left:18px; }
+  .whatsapp-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    background:#25D366;
+    color:#0A0A10;
+    font-weight:700;
+    font-size:15px;
+    padding:15px 24px;
+    border-radius:8px;
+    text-decoration:none;
+    margin-top:24px;
+    width:100%;
+  }
+  #successCard, #noRefCard{ display:none; }
+</style>
+</head>
+<body>
+  <div class="card" id="successCard">
+    <div class="check">✓</div>
+    <h1>You're in.</h1>
+    <p>Payment received, welcome to the founding cohort.</p>
+    <p>Check your email (and spam folder) for your access details. If it hasn't arrived in 15 minutes, message me directly.</p>
+    <ul class="next-steps">
+      <li>Check your inbox for the login/access link</li>
+      <li>Join the private community group (link in the welcome email)</li>
+      <li>Start with Module 1 today, momentum matters most in week one</li>
+    </ul>
+    <a class="whatsapp-btn" id="waBtn" href="#" target="_blank" rel="noopener">💬 Confirm your payment on WhatsApp</a>
+  </div>
+
+  <div class="card" id="noRefCard">
+    <h1>Didn't complete a payment?</h1>
+    <p>This page is only meant to be seen right after a successful payment, and we couldn't confirm one for this visit.</p>
+    <p>If you did pay and landed here by mistake, message me directly on WhatsApp with your name and email and I'll sort it out.</p>
+    <a class="whatsapp-btn" id="waBtn2" href="#" target="_blank" rel="noopener">💬 Message me on WhatsApp</a>
+  </div>
+
+  <script>
+    var message = "Hi Josh, I just made payment for your Zero To Foreign Client Cohort. Here are my details:\nName: \nEmail: ";
+    var waLink = "https://wa.me/2349160013685?text=" + encodeURIComponent(message);
+    document.getElementById('waBtn').href = waLink;
+    document.getElementById('waBtn2').href = waLink;
+
+    // Only treat this as a real payment if Paystack actually redirected here with a transaction reference.
+    // A bare visit to this URL (no reference/trxref param) never gets the success content or a Purchase event.
+    var params = new URLSearchParams(window.location.search);
+    var hasReference = params.get('reference') || params.get('trxref');
+
+    if(hasReference){
+      document.getElementById('successCard').style.display = 'block';
+      if(typeof fbq === 'function'){
+        fbq('track', 'Purchase', {value: 25000, currency: 'NGN'});
+      }
+    } else {
+      document.getElementById('noRefCard').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
