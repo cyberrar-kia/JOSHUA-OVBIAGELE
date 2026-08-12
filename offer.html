@@ -278,9 +278,58 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
   }
 
   footer{ text-align:center; padding:32px 24px 40px; font-size:12px; color:var(--ink-soft); }
+
+  /* ---------- Marquee urgency bar ---------- */
+  .topbar{
+    background:var(--ink);
+    color:#fff;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.02em;
+    padding:9px 0;
+    overflow:hidden;
+    white-space:nowrap;
+  }
+  .topbar-track{ display:inline-block; padding-left:100%; animation:topbar-marquee 42s linear infinite; }
+  .topbar-track span{ margin:0 40px; }
+  .topbar b{ color:#8AA0FF; }
+  @keyframes topbar-marquee{ 0%{ transform:translateX(0); } 100%{ transform:translateX(-100%); } }
+  @media (prefers-reduced-motion: reduce){ .topbar-track{ animation:none; padding-left:0; } }
+
+  /* ---------- Real seats progress bar ---------- */
+  .seats-row{
+    display:flex; align-items:center; gap:12px;
+    max-width:420px; margin:22px auto 0;
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--ink-soft);
+  }
+  .seats-bar{ flex:1; height:6px; background:var(--line); border-radius:99px; overflow:hidden; }
+  .seats-bar-fill{ height:100%; background:var(--blue); border-radius:99px; }
+
+  /* ---------- Sign-up toast ---------- */
+  .signup-toast{
+    position:fixed; left:18px; bottom:18px;
+    background:var(--ink); color:#fff;
+    padding:14px 20px; border-radius:12px;
+    font-size:14px; font-weight:600;
+    display:flex; align-items:center; gap:10px;
+    box-shadow:0 18px 40px -12px rgba(0,0,0,0.4);
+    border:1.5px solid var(--blue);
+    transform:translateY(120%) scale(0.92); opacity:0;
+    transition:transform .4s cubic-bezier(.34,1.56,.64,1), opacity .3s ease;
+    z-index:999; max-width:300px;
+  }
+  .signup-toast.show{ transform:translateY(0) scale(1); opacity:1; }
+  .signup-toast .dot{ width:9px; height:9px; border-radius:50%; background:var(--green); flex-shrink:0; }
+  @media (max-width:640px){ .signup-toast{ left:12px; bottom:70px; max-width:260px; } }
 </style>
 </head>
 <body>
+
+<div class="topbar"><div class="topbar-track">
+  <span>⚠ Put in the work for 14 days. If it's still not worth ₦25,000, message me for a full refund. <b>Price rises to ₦40,000</b> once the first 19 slots are filled</span>
+  <span>⚠ Put in the work for 14 days. If it's still not worth ₦25,000, message me for a full refund. <b>Price rises to ₦40,000</b> once the first 19 slots are filled</span>
+  <span>⚠ Put in the work for 14 days. If it's still not worth ₦25,000, message me for a full refund. <b>Price rises to ₦40,000</b> once the first 19 slots are filled</span>
+</div></div>
 
 <!-- ===================== HERO ===================== -->
 <header class="hero">
@@ -291,6 +340,11 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     <div class="cta-row">
       <a class="cta-btn" href="#buy">Join The Founding Cohort →</a>
       <div class="cta-sub">Beginner-friendly · Practical training · Learn at your own pace</div>
+      <div class="seats-row">
+        <span>🔥 Only <b id="seatsLeftText">19</b> seats left</span>
+        <div class="seats-bar"><div class="seats-bar-fill" id="seatsBarFill" style="width:100%"></div></div>
+        <span id="seatsTotalText">19</span>
+      </div>
     </div>
   </div>
 </header>
@@ -465,16 +519,6 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- ===================== REAL PEOPLE ALREADY IN ===================== -->
-<section>
-  <div class="wrap">
-    <div class="eyebrow">Real People, Already In</div>
-    <h2>These are real Founding Cohort members.</h2>
-    <p style="color:var(--ink-soft); margin-top:10px;">First names of confirmed people who have already registered.</p>
-    <div class="people-grid" id="peopleGrid"></div>
-  </div>
-</section>
-
 <!-- ===================== WHO THIS IS FOR ===================== -->
 <section class="problem">
   <div class="wrap">
@@ -584,6 +628,11 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
   <a href="#" id="stickyPayLink">Join The Founding Cohort — ₦25,000</a>
 </div>
 
+<div class="signup-toast" id="signupToast">
+  <span class="dot"></span>
+  <span id="signupToastText"></span>
+</div>
+
 <script>
   // FAQ accordion
   document.querySelectorAll('.faq-q').forEach(btn=>{
@@ -603,20 +652,40 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     "Abioye", "Abodunde", "Charles", "Udeme", "Oyinkansola", "Kingsley",
     "Daramola", "Naheem", "Adebisi", "Ibukunolowa", "Adebiyi", "Bodunde",
   ];
-  const peopleGrid = document.getElementById('peopleGrid');
-  REAL_MEMBERS.forEach(name => {
-    const chip = document.createElement('div');
-    chip.className = 'people-chip';
-    chip.innerHTML = '<span class="dot"></span>' + name;
-    peopleGrid.appendChild(chip);
-  });
 
-  // Real seats count, matches main landing page mechanism
+  // Real seats count
   (function(){
     const SEATS_TOTAL = 19;
     const SEATS_TAKEN = 0; // update this manually as real people actually pay
     const left = SEATS_TOTAL - SEATS_TAKEN;
     document.getElementById('guaranteeSeatsLeft').textContent = left;
+    document.getElementById('seatsLeftText').textContent = left;
+    document.getElementById('seatsTotalText').textContent = SEATS_TOTAL;
+    document.getElementById('seatsBarFill').style.width = (left / SEATS_TOTAL * 100) + '%';
+  })();
+
+  // Sign-up popup: real names only, shuffled once per load, each shown at most once per session
+  (function(){
+    const toast = document.getElementById('signupToast');
+    const textEl = document.getElementById('signupToastText');
+    const shuffled = REAL_MEMBERS.slice();
+    for(let i = shuffled.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    let i = 0;
+    function showNext(){
+      if(i >= shuffled.length) return;
+      textEl.textContent = shuffled[i] + " just registered";
+      toast.classList.add('show');
+      setTimeout(()=> toast.classList.remove('show'), 4500);
+      i++;
+    }
+    setTimeout(showNext, 8000);
+    const intervalHandle = setInterval(function(){
+      if(i >= shuffled.length){ clearInterval(intervalHandle); return; }
+      showNext();
+    }, 120000); // every 2 minutes
   })();
 
   // Real Paystack link, InitiateCheckout tracking, applied to every CTA on the page
