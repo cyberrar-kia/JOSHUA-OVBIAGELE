@@ -362,16 +362,6 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- ===================== 7. REAL PEOPLE ALREADY IN (testimonial slot) ===================== -->
-<section>
-  <div class="wrap">
-    <div class="eyebrow">Already Registered</div>
-    <h2>Real Founding Cohort members.</h2>
-    <p style="color:var(--ink-soft); margin-top:8px;">First names of confirmed people who have already registered. A live notification also shows these as they join.</p>
-    <div class="people-grid" id="peopleGrid"></div>
-  </div>
-</section>
-
 <!-- ===================== 8. WHAT YOU GET FOR ₦25,000 ===================== -->
 <section style="background:var(--bg-alt);">
   <div class="wrap">
@@ -535,13 +525,6 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
     "Abioye", "Abodunde", "Charles", "Udeme", "Oyinkansola", "Kingsley",
     "Daramola", "Naheem", "Adebisi", "Ibukunolowa", "Adebiyi", "Bodunde",
   ];
-  const peopleGrid = document.getElementById('peopleGrid');
-  REAL_MEMBERS.forEach(name => {
-    const chip = document.createElement('div');
-    chip.className = 'people-chip';
-    chip.innerHTML = '<span class="dot"></span>' + name;
-    peopleGrid.appendChild(chip);
-  });
 
   // Sign-up popup: real names only, shuffled once per load, each shown at most once per session
   (function(){
