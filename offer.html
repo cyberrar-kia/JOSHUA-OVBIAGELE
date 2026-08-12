@@ -213,6 +213,29 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
   @keyframes topbar-marquee{ 0%{ transform:translateX(0); } 100%{ transform:translateX(-100%); } }
   @media (prefers-reduced-motion: reduce){ .topbar-track{ animation:none; padding-left:0; } }
 
+  /* ---------- Corner timer ---------- */
+  .corner-timer{
+    position:fixed;
+    top:14px;
+    right:14px;
+    background:var(--ink);
+    color:#fff;
+    border-radius:10px;
+    padding:8px 14px;
+    font-family:'JetBrains Mono', monospace;
+    z-index:998;
+    text-align:center;
+    box-shadow:0 10px 24px -10px rgba(0,0,0,0.35);
+    border:1px solid rgba(255,255,255,0.15);
+  }
+  .corner-timer .lbl{ font-size:9.5px; text-transform:uppercase; letter-spacing:0.06em; color:#9AA3C7; }
+  .corner-timer .clock{ font-size:15px; font-weight:700; color:#fff; }
+  @media (max-width:640px){
+    .corner-timer{ top:auto; bottom:74px; right:12px; padding:6px 11px; }
+    .corner-timer .lbl{ font-size:8.5px; }
+    .corner-timer .clock{ font-size:13px; }
+  }
+
   /* ---------- Sign-up toast ---------- */
   .signup-toast{
     position:fixed; left:18px; bottom:18px;
@@ -232,6 +255,11 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
 </style>
 </head>
 <body>
+
+<div class="corner-timer">
+  <div class="lbl">Offer closes in</div>
+  <div class="clock" id="cornerClock">06:00:00</div>
+</div>
 
 <div class="topbar"><div class="topbar-track">
   <span>⚠ Learn the blueprint to bag foreign clients and launch your first paying software in 14 days with AI, or get a full refund. <b>Price rises to ₦40,000</b> once the first 19 slots are filled</span>
@@ -510,6 +538,40 @@ src="https://www.facebook.com/tr?id=1447722983356860&ev=PageView&noscript=1"
 </div>
 
 <script>
+  // Real 6h countdown, persisted per visitor so it doesn't fake-reset on refresh.
+  // Only rolls into a new cycle once a real 6h period has genuinely elapsed.
+  (function(){
+    const KEY = 'offerDeadlineOfferPage';
+    const DURATION_MS = 6 * 60 * 60 * 1000; // 6 hours, set an honest window you'll actually honor
+    let deadline;
+    try{
+      const stored = localStorage.getItem(KEY);
+      if(stored){
+        deadline = parseInt(stored, 10);
+      } else {
+        deadline = Date.now() + DURATION_MS;
+        localStorage.setItem(KEY, deadline);
+      }
+    } catch(e){
+      deadline = Date.now() + DURATION_MS; // storage blocked, fall back to a per-load timer
+    }
+    const clockEl = document.getElementById('cornerClock');
+    function tick(){
+      let remaining = deadline - Date.now();
+      if(remaining <= 0){
+        deadline = Date.now() + DURATION_MS;
+        try{ localStorage.setItem(KEY, deadline); } catch(e){}
+        remaining = deadline - Date.now();
+      }
+      const h = Math.floor(remaining / 3600000);
+      const m = Math.floor((remaining % 3600000) / 60000);
+      const s = Math.floor((remaining % 60000) / 1000);
+      clockEl.textContent = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
   document.querySelectorAll('.faq-q').forEach(btn=>{
     btn.addEventListener('click', ()=>{ btn.parentElement.classList.toggle('open'); });
   });
