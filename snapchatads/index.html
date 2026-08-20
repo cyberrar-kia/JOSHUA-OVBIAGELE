@@ -6,19 +6,23 @@
 <title>How To Sell On Snapchat: Build A Real Business, Not Just Run Ads</title>
 <meta name="description" content="Learn how to use Snapchat to find customers, run ads, and build a business that keeps bringing you buyers.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --bg:#FFFFFF;
-    --bg-alt:#F6F7FB;
-    --ink:#0F1222;
-    --ink-soft:#565B70;
+    --bg:#FAF7F1;
+    --bg-hero:#F1EEFB;
+    --bg-testimonial:#F2F5FA;
+    --bg-guarantee:#EFF6F1;
+    --cream:#FBF3E4;
+    --card:#FFFFFF;
+    --ink:#1B1E2B;
+    --ink-soft:#585C70;
     --blue:#3B5BFF;
     --blue-deep:#2A3FCB;
-    --green:#16A34A;
     --gold:#B8860B;
-    --line:#E7E9F2;
+    --line:#E8E2D4;
+    --line-cool:#E1E4F0;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{
@@ -27,20 +31,22 @@
     font-family:'Inter', sans-serif;
     line-height:1.65;
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
-  h1,h2,h3{ font-family:'Inter', sans-serif; font-weight:800; letter-spacing:-0.02em; line-height:1.18; }
+  h1,h2,h3{ font-family:'Inter', sans-serif; font-weight:800; letter-spacing:-0.02em; line-height:1.16; }
   .mono{ font-family:'JetBrains Mono', monospace; }
   .wrap{ max-width:760px; margin:0 auto; padding:0 24px; }
   a{ color:inherit; }
-  section{ padding:56px 0; }
+  section{ padding:64px 0; }
   .eyebrow{
     font-family:'JetBrains Mono', monospace;
     font-size:12px;
     text-transform:uppercase;
-    letter-spacing:0.1em;
+    letter-spacing:0.12em;
     color:var(--blue);
     font-weight:700;
-    margin-bottom:14px;
+    margin-bottom:16px;
+    display:inline-block;
   }
 
   .cta-btn{
@@ -52,95 +58,139 @@
     color:#fff;
     font-weight:700;
     font-size:16px;
-    padding:17px 30px;
-    border-radius:10px;
+    padding:18px 32px;
+    border-radius:12px;
     border:none;
     cursor:pointer;
     text-decoration:none;
-    box-shadow:0 14px 28px -10px rgba(59,91,255,0.5);
+    box-shadow:0 16px 32px -12px rgba(59,91,255,0.45);
     width:100%;
     max-width:400px;
+    transition:transform .15s ease, box-shadow .15s ease;
   }
-  .cta-btn:hover{ background:var(--blue-deep); }
+  .cta-btn:hover{ background:var(--blue-deep); transform:translateY(-1px); }
   .cta-row{ text-align:center; }
   .cta-sub{ font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--ink-soft); margin-top:12px; }
 
   /* ---------- Hero ---------- */
-  .hero{ padding:60px 0 44px; text-align:center; background:var(--bg-alt); }
-  .hero h1{ font-size:clamp(24px,4.6vw,36px); margin-bottom:18px; }
-  .hero h1 .blue{ color:var(--blue); }
-  .hero p{ font-size:17px; color:var(--ink-soft); max-width:56ch; margin:0 auto 30px; }
+  .hero{
+    padding:72px 0 52px;
+    text-align:center;
+    background:radial-gradient(120% 100% at 50% 0%, var(--bg-hero) 0%, var(--bg) 68%);
+  }
+  .hero h1{ font-size:clamp(25px,4.8vw,38px); margin-bottom:20px; }
+  .hero h1 .money{
+    color:var(--blue);
+    background:linear-gradient(180deg, transparent 62%, rgba(59,91,255,0.16) 62%);
+    padding:0 2px;
+  }
+  .hero p{ font-size:17px; color:var(--ink-soft); max-width:54ch; margin:0 auto 32px; }
 
   /* ---------- Personal letter ---------- */
-  .letter{ background:#fff; }
-  .letter-title{ font-size:clamp(24px,4vw,30px); margin-bottom:24px; }
-  .letter p{ color:var(--ink-soft); font-size:16px; margin-bottom:16px; }
-  .letter p b{ color:var(--ink); font-weight:700; }
-  .letter ol{ margin:16px 0 16px 22px; color:var(--ink-soft); font-size:16px; }
-  .letter li{ margin-bottom:8px; }
+  .letter-section{ background:var(--bg); }
+  .letter-card{
+    background:var(--cream);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:44px 38px;
+    box-shadow:0 24px 48px -28px rgba(80,60,20,0.18);
+  }
+  .letter-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--gold);
+    font-weight:700;
+    margin-bottom:18px;
+  }
+  .letter-card h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(24px,4vw,30px);
+    margin-bottom:22px;
+  }
+  .letter-card p{ color:var(--ink-soft); font-size:15.5px; margin-bottom:15px; }
+  .letter-card p b{ color:var(--ink); font-weight:700; }
+  @media (max-width:600px){
+    .letter-card{ padding:30px 22px; border-radius:16px; }
+  }
 
-  /* ---------- Proof / Testimonials ---------- */
-  .proof{ background:var(--bg-alt); }
-  .video-placeholder{
-    background:#fff;
-    border:2px dashed var(--line);
-    border-radius:14px;
+  /* ---------- Testimonials ---------- */
+  .testimonial-section{ background:var(--bg-testimonial); }
+  .video-card{
+    background:var(--card);
+    border:1px solid var(--line-cool);
+    border-radius:16px;
+    overflow:hidden;
+    margin-bottom:18px;
+    box-shadow:0 14px 30px -20px rgba(20,30,70,0.18);
+  }
+  .video-frame{
     aspect-ratio:16/9;
+    background:linear-gradient(135deg, #EEF1FB, #E4E9F9);
     display:flex;
-    flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:10px;
-    color:var(--ink-soft);
-    margin-bottom:16px;
+    position:relative;
   }
-  .video-placeholder .play-icon{
-    width:52px; height:52px; border-radius:50%;
-    background:var(--bg-alt); border:1px solid var(--line);
+  .video-frame .play-icon{
+    width:58px; height:58px; border-radius:50%;
+    background:#fff; box-shadow:0 8px 20px -6px rgba(20,30,70,0.35);
     display:flex; align-items:center; justify-content:center;
   }
-  .video-placeholder .play-icon::after{
-    content:""; border-style:solid; border-width:8px 0 8px 14px;
+  .video-frame .play-icon::after{
+    content:""; border-style:solid; border-width:9px 0 9px 16px;
     border-color:transparent transparent transparent var(--blue);
-    margin-left:3px;
+    margin-left:4px;
   }
-  .video-placeholder .label{ font-family:'JetBrains Mono', monospace; font-size:12px; }
-  .screenshot-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px; }
-  .screenshot-placeholder{
-    background:#fff;
-    border:2px dashed var(--line);
-    border-radius:12px;
+  .video-card .cap{ padding:14px 18px; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--ink-soft); border-top:1px solid var(--line-cool); }
+
+  .screenshot-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px; }
+  .screenshot-card{
+    background:var(--card);
+    border:1px solid var(--line-cool);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 12px 26px -18px rgba(20,30,70,0.18);
+  }
+  .screenshot-frame{
     aspect-ratio:4/5;
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
-    color:var(--ink-soft);
+    background:linear-gradient(135deg, #EEF1FB, #E4E9F9);
+    display:flex; align-items:center; justify-content:center;
   }
-  .screenshot-placeholder .icon{ font-size:26px; }
-  .screenshot-placeholder .label{ font-family:'JetBrains Mono', monospace; font-size:11px; text-align:center; padding:0 10px; }
-  @media (max-width:560px){ .screenshot-grid{ grid-template-columns:1fr 1fr; } }
+  .screenshot-frame .mark{
+    width:40px; height:40px; border-radius:10px;
+    border:2px solid #C7CEEE;
+  }
+  .screenshot-card .cap{ padding:10px 14px; font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--ink-soft); border-top:1px solid var(--line-cool); text-align:center; }
+  @media (max-width:560px){ .screenshot-grid{ grid-template-columns:1fr 1fr; gap:12px; } }
 
   /* ---------- Benefit cards ---------- */
+  .learn-section{ background:var(--bg); }
   .benefit-card{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:26px;
+    background:var(--card);
+    border:1px solid var(--line-cool);
+    border-radius:16px;
+    padding:28px;
     margin-bottom:16px;
+    box-shadow:0 14px 30px -22px rgba(20,30,70,0.16);
   }
   .benefit-card.highlight{
     border:1.5px solid var(--gold);
-    background:linear-gradient(180deg, #FFFBEB, #fff);
+    background:linear-gradient(180deg, #FFFBEF, #fff);
   }
   .benefit-num{
     font-family:'JetBrains Mono', monospace;
     font-size:12px;
     color:var(--blue);
-    border:1px solid var(--line);
-    border-radius:8px;
-    width:32px; height:32px;
+    border:1px solid var(--line-cool);
+    border-radius:9px;
+    width:34px; height:34px;
     display:flex; align-items:center; justify-content:center;
-    margin-bottom:14px;
+    margin-bottom:16px;
   }
-  .benefit-card h3{ font-size:18px; margin-bottom:8px; }
+  .benefit-card h3{ font-size:18px; margin-bottom:10px; }
   .benefit-card p{ color:var(--ink-soft); font-size:14.5px; }
   .free-tag{
     display:inline-block;
@@ -149,38 +199,45 @@
     font-family:'JetBrains Mono', monospace;
     font-size:11px;
     font-weight:700;
-    padding:5px 12px;
-    border-radius:999px;
-    margin-top:14px;
+    padding:6px 14px;
+    border-radius:8px;
+    margin-top:16px;
   }
 
   /* ---------- Guarantee ---------- */
+  .guarantee-section{ background:var(--bg-guarantee); }
   .guarantee-box{
-    border:1.5px solid var(--blue);
-    border-radius:16px;
-    padding:30px;
-    background:var(--bg-alt);
+    border:1px solid #CFE3D5;
+    border-radius:20px;
+    padding:36px 32px;
+    background:var(--card);
     text-align:center;
+    box-shadow:0 20px 40px -26px rgba(20,60,35,0.16);
   }
   .guarantee-icon{
-    width:56px; height:56px;
-    border-radius:50%;
-    background:#fff;
-    border:1.5px solid var(--blue);
+    width:58px; height:58px;
+    border-radius:16px;
+    background:var(--bg-guarantee);
+    border:1px solid #CFE3D5;
     display:flex; align-items:center; justify-content:center;
-    font-size:24px;
-    margin:0 auto 16px;
+    margin:0 auto 18px;
   }
+  .guarantee-icon svg{ width:26px; height:26px; }
   .guarantee-box h3{ font-size:20px; margin-bottom:14px; }
   .guarantee-box p{ color:var(--ink-soft); font-size:14.5px; }
 
-  /* ---------- Final CTA ---------- */
-  .final-cta{ background:var(--bg-alt); text-align:center; }
-  .final-cta h2{ font-size:clamp(24px,4vw,30px); margin-bottom:14px; }
-  .final-cta p{ color:var(--ink-soft); margin-bottom:10px; max-width:56ch; margin-left:auto; margin-right:auto; }
-  .urgency-line{ font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--gold); font-weight:700; margin-top:16px; }
+  /* ---------- CTA sections ---------- */
+  .cta-section{ background:var(--bg-hero); text-align:center; }
+  .cta-section h2{ font-size:clamp(24px,4vw,30px); margin-bottom:14px; }
+  .cta-section p{ color:var(--ink-soft); margin-bottom:10px; max-width:56ch; margin-left:auto; margin-right:auto; }
+  .urgency-line{ font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--gold); font-weight:700; margin-top:18px; }
 
-  footer{ text-align:center; padding:32px 24px 40px; font-size:12px; color:var(--ink-soft); }
+  footer{ text-align:center; padding:36px 24px 44px; font-size:12px; color:var(--ink-soft); background:var(--bg); }
+
+  @media (max-width:640px){
+    section{ padding:48px 0; }
+    .wrap{ padding:0 20px; }
+  }
 </style>
 </head>
 <body>
@@ -188,8 +245,9 @@
 <!-- ===================== 1. HERO ===================== -->
 <header class="hero">
   <div class="wrap">
-    <h1>"I Helped This Struggling Instagram Business Owner Do <span class="blue">₦14,000,000</span> In Sales Last Year By Changing Just Two Things In Her Business"</h1>
-    <p>And I'm going to show you exactly what those two things were, and how you can use them to grow your own business on Snapchat.</p>
+    <div class="eyebrow">The Snapchat Business System</div>
+    <h1>I Helped This Struggling Instagram Business Owner Do <span class="money">₦14,000,000</span> In Sales Last Year By Changing Just Two Things In Her Business</h1>
+    <p>I'll show you exactly what I changed, how Snapchat played a role, and how you can use the same approach to grow your own business.</p>
     <div class="cta-row">
       <a class="cta-btn" href="#" data-cta>Show Me How →</a>
     </div>
@@ -197,102 +255,70 @@
 </header>
 
 <!-- ===================== 2. PERSONAL LETTER ===================== -->
-<section class="letter">
+<section class="letter-section">
   <div class="wrap">
-    <h2 class="letter-title">Dear Business Owner,</h2>
+    <div class="letter-card">
+      <div class="letter-label">A Personal Message From Joshua</div>
+      <h2>Dear Business Owner,</h2>
 
-    <p>If you sell products for young people and you want to sell massively before the end of 2026, then I am the only man you should be listening to right now.</p>
+      <p>If you sell products for young people and you want to sell massively before the end of 2026, then I am the only man you should be listening to right now.</p>
 
-    <p>And I am not saying this just to sound confident.</p>
+      <p>And I am not saying this just to sound confident.</p>
 
-    <p>Last year, I personally helped a business owner who was struggling to get sales from Instagram make ₦14,000,000 in sales in just 14 days.</p>
+      <p>Last year, I personally helped a business owner who was struggling to get sales from Instagram make ₦14,000,000 in sales in just 14 days.</p>
 
-    <p>How did we do it?</p>
+      <p>How did we do it? I made two major changes to her business.</p>
 
-    <p>I made two major changes to her business.</p>
+      <p>First, I moved her away from depending only on Instagram and took her products to other platforms, especially TikTok and Snapchat.</p>
 
-    <p>First, I moved her away from depending only on Instagram and took her products to other platforms, especially TikTok and Snapchat.</p>
+      <p>You see, <b>sometimes your product is not bad.</b> You may just be selling it in a market that is already too crowded.</p>
 
-    <p>You see, <b>sometimes your product is not bad.</b></p>
+      <p>If other businesses are selling the same product easily while you are struggling, you know there is demand for the product, or your Instagram ad costs keep going up without enough sales, then the problem may not be your product. It may simply be where you are selling it.</p>
 
-    <p>You are just selling it to the wrong people or in the wrong place.</p>
+      <p><b>And this is where Snapchat comes in.</b> While many business owners are fighting for customers on Instagram, Snapchat is still being overlooked by many businesses.</p>
 
-    <p>Think about it. You can have a good product, good pictures, nice videos and even give discounts, but if thousands of other businesses are showing the same type of product to the same people every day, getting sales becomes much harder.</p>
+      <p>But let me be clear. <b>You cannot just take your Instagram ad, put it on Snapchat and expect it to work.</b> Snapchat has a younger audience, so you need to understand how to sell to them.</p>
 
-    <p>And while you are struggling to sell, another person selling almost the same thing might be making sales every single day.</p>
+      <p>And there is another opportunity I want to show you. <b>You don't always have to sell just one product to one person.</b> You can structure your business to attract people who want to buy your products in bulk and resell them for profit. There are young people and students looking for products they can sell in their schools, universities and communities.</p>
 
-    <p>So how do you know if your problem is your product or the market?</p>
+      <p>And that is exactly what I am going to teach you. I will not only show you how to run Snapchat ads. I will show you how to use Snapchat to find customers, sell your products, attract bulk buyers and build a real business around the platform.</p>
 
-    <p>Here are 3 simple signs:</p>
-    <ol>
-      <li>Other people are selling the same product easily, but you are struggling to sell yours.</li>
-      <li>You know people want your product, but somehow you are not getting enough sales.</li>
-      <li>You are running Instagram ads, but the cost keeps going up and you are still not getting enough sales, even after trying discounts and making better videos.</li>
-    </ol>
+      <p>Because the goal is not just to run Snapchat ads. <b>The goal is to use Snapchat to build a business that keeps bringing you customers.</b></p>
 
-    <p>If these sound like what you are experiencing, then there is a good chance your product is not the problem.</p>
-
-    <p><b>You may just be selling in a market that is already too crowded.</b></p>
-
-    <p><b>And this is where Snapchat comes in.</b></p>
-
-    <p>While many business owners are fighting for customers on Instagram, Snapchat is still being overlooked by many businesses. And that means there is an opportunity.</p>
-
-    <p>But let me be clear. <b>You cannot just take your Instagram ad, put it on Snapchat and expect it to work.</b></p>
-
-    <p>Snapchat has a younger audience. So if you sell things like wigs, perfumes, bags, lip gloss, clothes, accessories or other products that young people like, you need to know how to sell to them properly.</p>
-
-    <p>And there is another thing you need to understand.</p>
-
-    <p><b>You don't always have to sell just one product to one person.</b></p>
-
-    <p>You can sell your products in bulk to people who want to buy from you and resell them to other people. There are students and young people looking for products they can start selling in their schools, universities and communities.</p>
-
-    <p>So instead of always looking for someone to buy just one product from you, you can build a business where people come to you to buy in bulk and resell for profit.</p>
-
-    <p>And that is exactly what I am going to teach you.</p>
-
-    <p>I will not only show you how to run Snapchat ads. I will show you how to use Snapchat to build a real business, find customers, get people to buy from you and get bulk buyers who can keep coming back.</p>
-
-    <p>Because the goal is not just to run Snapchat ads. <b>The goal is to use Snapchat to build a business that keeps bringing you customers.</b></p>
-
-    <p>And if you are still doubting whether this works, don't take my word for it.</p>
-
-    <p>Look at the testimonials from business owners I have worked with below. These are people who have used what I taught them and are getting massive results.</p>
-
-    <p>After you see their results, I will show you exactly how you can start doing the same for your own business.</p>
+      <p>And if you are still doubting whether this works, don't take my word for it. Look at the testimonials from business owners I have worked with below. These are people who have used what I taught them and are getting massive results.</p>
+    </div>
   </div>
 </section>
 
-<!-- ===================== 3. PROOF + TESTIMONIALS ===================== -->
-<section class="proof">
+<!-- ===================== 3. TESTIMONIALS ===================== -->
+<section class="testimonial-section">
   <div class="wrap">
     <div class="eyebrow">Proof</div>
     <h2 style="margin-bottom:6px;">Still Think I'm Just Talking?</h2>
     <p style="color:var(--ink-soft); margin-bottom:28px;">Don't take my word for it. Look at what business owners I've worked with are saying.</p>
 
-    <div class="video-placeholder">
-      <div class="play-icon"></div>
-      <div class="label">TESTIMONIAL VIDEO 1 — replace with real video</div>
+    <div class="video-card">
+      <div class="video-frame"><div class="play-icon"></div></div>
+      <div class="cap">TESTIMONIAL VIDEO 1 — replace with real video</div>
     </div>
-    <div class="video-placeholder">
-      <div class="play-icon"></div>
-      <div class="label">TESTIMONIAL VIDEO 2 — replace with real video</div>
+    <div class="video-card">
+      <div class="video-frame"><div class="play-icon"></div></div>
+      <div class="cap">TESTIMONIAL VIDEO 2 — replace with real video</div>
     </div>
 
-    <h3 style="font-size:16px; margin-top:12px; margin-bottom:4px;">More Results From Business Owners I've Worked With</h3>
+    <h3 style="font-size:15.5px; margin-top:14px; margin-bottom:2px;">More Results From Business Owners I've Worked With</h3>
     <div class="screenshot-grid">
-      <div class="screenshot-placeholder"><div class="icon">🖼️</div><div class="label">SCREENSHOT 1 — replace with real result</div></div>
-      <div class="screenshot-placeholder"><div class="icon">🖼️</div><div class="label">SCREENSHOT 2 — replace with real result</div></div>
-      <div class="screenshot-placeholder"><div class="icon">🖼️</div><div class="label">SCREENSHOT 3 — replace with real result</div></div>
-      <div class="screenshot-placeholder"><div class="icon">🖼️</div><div class="label">SCREENSHOT 4 — replace with real result</div></div>
+      <div class="screenshot-card"><div class="screenshot-frame"><div class="mark"></div></div><div class="cap">SCREENSHOT 1</div></div>
+      <div class="screenshot-card"><div class="screenshot-frame"><div class="mark"></div></div><div class="cap">SCREENSHOT 2</div></div>
+      <div class="screenshot-card"><div class="screenshot-frame"><div class="mark"></div></div><div class="cap">SCREENSHOT 3</div></div>
+      <div class="screenshot-card"><div class="screenshot-frame"><div class="mark"></div></div><div class="cap">SCREENSHOT 4</div></div>
     </div>
-    <p style="color:var(--ink-soft); font-size:13.5px; margin-top:16px;">These are real business owners who implemented what I taught them. See their full results for yourself.</p>
+    <p style="color:var(--ink-soft); font-size:13.5px; margin-top:18px;">These are real business owners who implemented what I taught them. See their full results for yourself.</p>
   </div>
 </section>
 
 <!-- ===================== 4. CTA ===================== -->
-<section class="final-cta">
+<section class="cta-section">
   <div class="wrap">
     <h2>Ready To Build Your Business On Snapchat?</h2>
     <p>Learn how to use Snapchat to find customers, run ads and build a business that can keep selling.</p>
@@ -303,7 +329,7 @@
 </section>
 
 <!-- ===================== 5. WHAT YOU WILL LEARN ===================== -->
-<section>
+<section class="learn-section">
   <div class="wrap">
     <div class="eyebrow">The Curriculum</div>
     <h2 style="margin-bottom:8px;">Here's Exactly What You'll Learn</h2>
@@ -338,11 +364,13 @@
 </section>
 
 <!-- ===================== 6. GUARANTEE ===================== -->
-<section class="proof">
+<section class="guarantee-section">
   <div class="wrap">
     <div class="eyebrow">Risk Reversal</div>
     <div class="guarantee-box">
-      <div class="guarantee-icon">🛡️</div>
+      <div class="guarantee-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2F7A4A" stroke-width="1.8"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V5l-8-3z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
       <h3>Try It. If You Don't Find Value, Get Your Money Back.</h3>
       <p>You'll have a full opportunity to go through the training and decide if it is right for you. If you don't find value in the training within the stated guarantee period, you can request a refund according to the guarantee terms.</p>
     </div>
@@ -350,7 +378,7 @@
 </section>
 
 <!-- ===================== 7. FINAL CTA ===================== -->
-<section class="final-cta">
+<section class="cta-section">
   <div class="wrap">
     <h2>Stop Fighting For The Same Customers On Instagram.</h2>
     <p>Learn how to use Snapchat to reach new customers, sell your products and build a business around the platform.</p>
