@@ -204,6 +204,77 @@
     margin-top:16px;
   }
 
+  /* ---------- Curriculum list ---------- */
+  .learn-list{ list-style:none; margin-top:8px; }
+  .learn-item{
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    padding:20px 0;
+    border-bottom:1px solid var(--line-cool);
+  }
+  .learn-item:first-child{ padding-top:0; }
+  .learn-item .bullet{
+    flex-shrink:0;
+    width:12px; height:12px;
+    border-radius:50%;
+    background:var(--blue);
+    margin-top:7px;
+  }
+  .learn-item .content{ flex:1; }
+  .learn-item h3{ font-size:17px; margin-bottom:6px; }
+  .learn-item p{ color:var(--ink-soft); font-size:14.5px; }
+  .learn-item .item-value{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    color:var(--blue);
+    font-weight:700;
+    margin-top:8px;
+    display:inline-block;
+  }
+  .learn-item.highlight .bullet{ background:var(--gold); }
+
+  .value-stack{
+    margin-top:8px;
+    padding-top:22px;
+  }
+  .value-row{ display:flex; justify-content:space-between; align-items:center; padding:10px 0; }
+  .value-row .label{ font-size:14.5px; color:var(--ink-soft); }
+  .value-row .amt{ font-family:'JetBrains Mono', monospace; font-size:16px; font-weight:700; }
+  .value-row.total{ border-top:1px solid var(--line-cool); margin-top:6px; padding-top:16px; }
+  .value-row.final .amt{ font-size:26px; color:var(--blue); }
+  .value-strike{ text-decoration:line-through; color:#9CA3AF; margin-right:10px; font-weight:500; }
+
+  /* ---------- Inline curriculum timer ---------- */
+  .inline-timer{
+    max-width:340px;
+    margin:32px auto 0;
+    background:var(--cream);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:18px 24px;
+    text-align:center;
+  }
+  .inline-timer .lbl{ font-family:'JetBrains Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--gold); font-weight:700; margin-bottom:8px; }
+  .inline-timer .clock{ font-family:'JetBrains Mono', monospace; font-size:26px; font-weight:800; color:var(--ink); }
+
+  /* ---------- Sign-up toast ---------- */
+  .signup-toast{
+    position:fixed; left:18px; bottom:18px;
+    background:var(--ink); color:#fff;
+    padding:14px 20px; border-radius:12px;
+    font-size:14px; font-weight:600;
+    display:flex; align-items:center; gap:10px;
+    box-shadow:0 18px 40px -12px rgba(0,0,0,0.4);
+    border:1.5px solid var(--blue);
+    transform:translateY(120%) scale(0.92); opacity:0;
+    transition:transform .4s cubic-bezier(.34,1.56,.64,1), opacity .3s ease;
+    z-index:999; max-width:300px;
+  }
+  .signup-toast.show{ transform:translateY(0) scale(1); opacity:1; }
+  .signup-toast .dot{ width:9px; height:9px; border-radius:50%; background:#16A34A; flex-shrink:0; }
+  @media (max-width:640px){ .signup-toast{ left:12px; bottom:12px; max-width:260px; } }
+
   /* ---------- Guarantee ---------- */
   .guarantee-section{ background:var(--bg-guarantee); }
   .guarantee-box{
@@ -246,7 +317,7 @@
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">The Snapchat Business System</div>
-    <h1>I Helped This Struggling Instagram Business Owner Do <span class="money">₦14,000,000</span> In Sales Last Year By Changing Just Two Things In Her Business</h1>
+    <h1>This Is How I Helped A Struggling Instagram Business Owner Do <span class="money">₦14,000,000</span> In Sales By Changing Just Two Things In Her Business</h1>
     <p>I'll show you exactly what I changed, how Snapchat played a role, and how you can use the same approach to grow your own business.</p>
     <div class="cta-row">
       <a class="cta-btn" href="#" data-cta>Show Me How →</a>
@@ -324,6 +395,7 @@
     <p>Learn how to use Snapchat to find customers, run ads and build a business that can keep selling.</p>
     <div class="cta-row" style="margin-top:20px;">
       <a class="cta-btn" href="#" data-cta>Yes, Show Me The System →</a>
+      <div class="cta-sub" style="font-size:13px; margin-top:14px; font-weight:700; color:var(--ink);">For ₦15,000</div>
     </div>
   </div>
 </section>
@@ -335,30 +407,56 @@
     <h2 style="margin-bottom:8px;">Here's Exactly What You'll Learn</h2>
     <p style="color:var(--ink-soft); margin-bottom:28px;">This is not just a course on how to click buttons and run Snapchat ads. I want to show you how to actually use Snapchat to grow your business.</p>
 
-    <div class="benefit-card">
-      <div class="benefit-num">01</div>
-      <h3>How To Structure Your Business For Bulk Buyers On Snapchat</h3>
-      <p>You will learn how to structure your business to attract people who want to buy your products in bulk and resell them, even if you currently only sell one product at a time.</p>
+    <ul class="learn-list">
+      <li class="learn-item">
+        <div class="bullet"></div>
+        <div class="content">
+          <h3>How To Structure Your Business For Bulk Buyers On Snapchat</h3>
+          <p>You will learn how to structure your business to attract people who want to buy your products in bulk and resell them, even if you currently only sell one product at a time.</p>
+          <div class="item-value">Valued at ₦50,000</div>
+        </div>
+      </li>
+      <li class="learn-item">
+        <div class="bullet"></div>
+        <div class="content">
+          <h3>The Type Of Videos You Should Create For Snapchat</h3>
+          <p>You will learn the type of videos you need to create to advertise your products on Snapchat and get people interested in buying from you this last quarter of the year.</p>
+          <div class="item-value">Valued at ₦20,000</div>
+        </div>
+      </li>
+      <li class="learn-item">
+        <div class="bullet"></div>
+        <div class="content">
+          <h3>How To Launch A Profitable Snapchat Sales Campaign</h3>
+          <p>You will learn how to launch a Snapchat sales campaign that is built around your specific business, your product and the people you want to sell to.</p>
+          <div class="item-value">Valued at ₦30,000</div>
+        </div>
+      </li>
+      <li class="learn-item highlight">
+        <div class="bullet"></div>
+        <div class="content">
+          <h3>A FREE 1-on-1 Call With Me</h3>
+          <p>You will get an exclusive 1-on-1 call with me where I will show you exactly how to script your video ad for your specific business, so you know exactly what to say and how to present your product.</p>
+          <div class="free-tag">FREE FOR THE NEXT 24 HOURS</div>
+          <p style="margin-top:10px;">This 1-on-1 call is completely free for everyone who signs up within the next 24 hours.</p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="value-stack">
+      <div class="value-row total">
+        <div class="label">Total value</div>
+        <div class="amt">₦100,000</div>
+      </div>
+      <div class="value-row final">
+        <div class="label">Your price for the next 24 hours</div>
+        <div class="amt"><span class="value-strike">₦100,000</span>₦15,000</div>
+      </div>
     </div>
 
-    <div class="benefit-card">
-      <div class="benefit-num">02</div>
-      <h3>The Type Of Videos You Should Create For Snapchat</h3>
-      <p>You will learn the type of videos you need to create to advertise your products on Snapchat and get people interested in buying from you this last quarter of the year.</p>
-    </div>
-
-    <div class="benefit-card">
-      <div class="benefit-num">03</div>
-      <h3>How To Launch A Profitable Snapchat Sales Campaign</h3>
-      <p>You will learn how to launch a Snapchat sales campaign that is built around your specific business, your product and the people you want to sell to.</p>
-    </div>
-
-    <div class="benefit-card highlight">
-      <div class="benefit-num" style="border-color:var(--gold); color:var(--gold);">04</div>
-      <h3>A FREE 1-on-1 Call With Me</h3>
-      <p>You will get an exclusive 1-on-1 call with me where I will show you exactly how to script your video ad for your specific business, so you know exactly what to say and how to present your product.</p>
-      <div class="free-tag">FREE FOR THE NEXT 24 HOURS</div>
-      <p style="margin-top:10px;">This 1-on-1 call is completely free for everyone who signs up within the next 24 hours.</p>
+    <div class="inline-timer">
+      <div class="lbl">This price ends in</div>
+      <div class="clock" id="curriculumClock">06:00:00</div>
     </div>
   </div>
 </section>
@@ -372,7 +470,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="#2F7A4A" stroke-width="1.8"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V5l-8-3z"/><path d="m9 12 2 2 4-4"/></svg>
       </div>
       <h3>Try It. If You Don't Find Value, Get Your Money Back.</h3>
-      <p>You'll have a full opportunity to go through the training and decide if it is right for you. If you don't find value in the training within the stated guarantee period, you can request a refund according to the guarantee terms.</p>
+      <p>Here is a money back guarantee: if you go through this program and you are unable to set up your business and launch your first ad in 14 days, you get a full 100% refund from me.</p>
     </div>
   </div>
 </section>
@@ -394,12 +492,79 @@
   © 2026, All rights reserved. Results described belong to the referenced business owner. Individual results depend on effort and application of the material.
 </footer>
 
+<div class="signup-toast" id="signupToast">
+  <span class="dot"></span>
+  <span id="signupToastText"></span>
+</div>
+
 <script>
   // Single place to wire in the real checkout link once it exists.
   var CHECKOUT_LINK = "#"; // TODO: replace with the real Snapchat Ads checkout/payment link
   document.querySelectorAll('[data-cta]').forEach(function(btn){
     btn.href = CHECKOUT_LINK;
   });
+
+  // Real 6h countdown under the curriculum, persisted per visitor so it doesn't fake-reset on refresh.
+  // Only rolls into a new cycle once a real 6h period has genuinely elapsed.
+  (function(){
+    const KEY = 'snapchatOfferDeadline';
+    const DURATION_MS = 6 * 60 * 60 * 1000;
+    let deadline;
+    try{
+      const stored = localStorage.getItem(KEY);
+      if(stored){
+        deadline = parseInt(stored, 10);
+      } else {
+        deadline = Date.now() + DURATION_MS;
+        localStorage.setItem(KEY, deadline);
+      }
+    } catch(e){
+      deadline = Date.now() + DURATION_MS;
+    }
+    const clockEl = document.getElementById('curriculumClock');
+    function tick(){
+      let remaining = deadline - Date.now();
+      if(remaining <= 0){
+        deadline = Date.now() + DURATION_MS;
+        try{ localStorage.setItem(KEY, deadline); } catch(e){}
+        remaining = deadline - Date.now();
+      }
+      const h = Math.floor(remaining / 3600000);
+      const m = Math.floor((remaining % 3600000) / 60000);
+      const s = Math.floor((remaining % 60000) / 1000);
+      clockEl.textContent = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // Sign-up popup. Empty until real Snapchat Ads buyers exist, do not invent names here.
+  (function(){
+    const REAL_SNAPCHAT_BUYERS = [
+      // Add a real first name here each time someone genuinely pays for THIS offer, e.g. "Afolabi"
+    ];
+    if(REAL_SNAPCHAT_BUYERS.length === 0) return;
+    const toast = document.getElementById('signupToast');
+    const textEl = document.getElementById('signupToastText');
+    const shuffled = REAL_SNAPCHAT_BUYERS.slice();
+    for(let i = shuffled.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    let i = 0;
+    function showNext(){
+      if(i >= shuffled.length) return;
+      textEl.textContent = shuffled[i] + " just registered";
+      toast.classList.add('show');
+      setTimeout(()=> toast.classList.remove('show'), 4500);
+      i++;
+    }
+    setTimeout(showNext, 8000);
+    const intervalHandle = setInterval(function(){
+      if(i >= shuffled.length){ clearInterval(intervalHandle); return; }
+      showNext();
+    }, 120000);
+  })();
 </script>
 
 </body>
